@@ -108,17 +108,16 @@ const galleryImages: GalleryImage[] = [
   },
   {
     id: 2,
-     image: "/images/mtpt.png",
+    image: "/images/mtpt.png",
     // image: "/images/therapy-2.png",
     alt: "SPARRC rehabilitation treatment",
   },
   {
     id: 3,
-     image: "/images/mtpt.png",
+    image: "/images/mtpt.png",
     // image: "/images/therapy-3.png",
     alt: "SPARRC mobility treatment",
   },
- 
 ];
 
 export default function TherapiesSection() {
@@ -220,7 +219,7 @@ export default function TherapiesSection() {
       setActiveIndex(
         (current) => (current + 1) % galleryImages.length
       );
-    }, 3500);
+    }, 5500);
 
     return () => window.clearInterval(interval);
   }, [isPaused]);
@@ -387,7 +386,7 @@ export default function TherapiesSection() {
 
                     return (
                       <motion.div
-                        key={`${galleryImage.id}-${activeIndex}`}
+                        key={galleryImage.id}
                         drag={
                           position === 0 ? "x" : false
                         }
@@ -396,6 +395,7 @@ export default function TherapiesSection() {
                           right: 0,
                         }}
                         dragElastic={0.16}
+                        dragMomentum={false}
                         onDragEnd={handleDragEnd}
                         initial={{
                           opacity: 0,
@@ -416,15 +416,44 @@ export default function TherapiesSection() {
                           scale: 0.94,
                         }}
                         transition={{
-                          duration: 0.5,
-                          ease: [
-                            0.22,
-                            1,
-                            0.36,
-                            1,
-                          ],
+                          x: {
+                            duration: 1.1,
+                            ease: [
+                              0.22,
+                              1,
+                              0.36,
+                              1,
+                            ],
+                          },
+                          y: {
+                            duration: 1.1,
+                            ease: [
+                              0.22,
+                              1,
+                              0.36,
+                              1,
+                            ],
+                          },
+                          scale: {
+                            duration: 1.1,
+                            ease: [
+                              0.22,
+                              1,
+                              0.36,
+                              1,
+                            ],
+                          },
+                          opacity: {
+                            duration: 0.8,
+                            ease: [
+                              0.22,
+                              1,
+                              0.36,
+                              1,
+                            ],
+                          },
                         }}
-                        className={`absolute left-0 top-0 h-[320px] w-[calc(100%-28px)] overflow-hidden rounded-[20px] bg-[#e9e9e9] shadow-[0_15px_38px_rgba(16,29,50,0.12)] ${
+                        className={`absolute left-0 top-0 h-[320px] w-[calc(100%-28px)] overflow-hidden rounded-[20px] bg-[#e9e9e9] shadow-[0_15px_38px_rgba(16,29,50,0.12)] will-change-transform ${
                           position === 0
                             ? "cursor-grab active:cursor-grabbing"
                             : ""
@@ -437,7 +466,7 @@ export default function TherapiesSection() {
                           priority={position === 0}
                           draggable={false}
                           sizes="(max-width: 640px) 90vw, 370px"
-                          className={`pointer-events-none select-none object-cover transition duration-500 ${
+                          className={`pointer-events-none select-none object-cover transition duration-1000 ${
                             position === 0
                               ? "grayscale-0"
                               : "grayscale"
