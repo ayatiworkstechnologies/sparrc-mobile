@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-circe);
+  --font-heading: var(--font-jost);
+  --font-body: var(--font-circe);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-circe), Arial, Helvetica, sans-serif;
+}
+
+/* Jost for headings and navigation */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+nav,
+button,
+.font-heading {
+  font-family: var(--font-jost), Arial, Helvetica, sans-serif;
+}
+
+/* Circe for normal content */
+p,
+span,
+a,
+label,
+input,
+textarea,
+select,
+.font-body {
+  font-family: var(--font-circe), Arial, Helvetica, sans-serif;
+}
