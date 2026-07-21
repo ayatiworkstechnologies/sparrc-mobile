@@ -5,6 +5,7 @@ import "./globals.css";
 
 import Header from "../component/Header";
 import Footer from "../component/Footer";
+import BottomNav from "../component/Bottomnav";
 
 const jost = Jost({
   variable: "--font-jost",
@@ -42,6 +43,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
 
         <Footer />
+        <BottomNav />
       </body>
     </html>
   );
