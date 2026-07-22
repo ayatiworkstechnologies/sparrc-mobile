@@ -18,52 +18,47 @@ const teamMembers: TeamMember[] = [
     name: "Sujatha Pugazhendi",
     designation: "Founder & CEO",
     description:
-      "Sujatha is a trained Physiotherapist who wished to take Sports Medicine to all...",
-    // image: "/images/sujatha-pugazhendi.png",
-     image: "/images/example.png",
+      "Sujatha, a trained Physiotherapist, wished to bring Sports Medicine to everyone.",
+    image: "/images/sujatha-pugazhendi.png",
   },
   {
     id: 2,
     name: "Dr. Kannan Pugazhendi",
     designation: "Co-Founder : SPARRC",
     description:
-      "Dr. Kannan Pugazhendi, graduated from Madras Medical College in...",
-    // image: "/images/dr-kannan-pugazhendi.png",
-    image: "/images/example.png",
+      "Dr. Kannan Pugazhendi graduated from Madras Medical College in Chennai.",
+    image: "/images/dr-kannan-pugazhendi.png",
   },
   {
     id: 3,
     name: "Ganesh",
     designation: "CTO",
     description:
-      "Ganesh has technology background and joined SPARRC as the CTO in 2012, now heading our...",
-    // image: "/images/ganesh.png",
-    image: "/images/example.png",
+      "Ganesh joined SPARRC as CTO in 2012 and currently leads the organisation’s technology initiatives.",
+    image: "/images/ganesh.png",
   },
   {
     id: 4,
     name: "Sumitha",
     designation: "General Manager",
     description:
-      "Sumitha’s transformative and rewarding journey with SPARRC began in 2012 as physiotherapist...",
-    // image: "/images/sumitha.png",
-    image: "/images/example.png",
+      "Sumitha’s transformative and rewarding journey with SPARRC began in 2012 as a physiotherapist.",
+    image: "/images/sumitha.png",
   },
   {
     id: 5,
     name: "Dr Aravind",
     designation: "Primary Care Physician",
     description:
-      "Dr. Aravind is a Primary Care Physician, currently pursuing his fellowship in Fitness and...",
-    // image: "/images/dr-aravind.png",
-    image: "/images/example.png",
+      "Dr. Aravind is a Primary Care Physician currently pursuing his fellowship in Fitness Medicine.",
+    image: "/images/dr-aravind.png",
   },
 ];
 
 export default function OurTeamSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const [direction, setDirection] = useState(1);
+  const [isPaused, setIsPaused] = useState(false);
 
   const goToNext = useCallback(() => {
     setDirection(1);
@@ -82,6 +77,10 @@ export default function OurTeamSlider() {
   }, []);
 
   const goToSlide = (index: number) => {
+    if (index === activeIndex) {
+      return;
+    }
+
     setDirection(index > activeIndex ? 1 : -1);
     setActiveIndex(index);
   };
@@ -105,11 +104,13 @@ export default function OurTeamSlider() {
       return;
     }
 
-    const sliderInterval = window.setInterval(() => {
+    const interval = window.setInterval(() => {
       goToNext();
     }, 4000);
 
-    return () => window.clearInterval(sliderInterval);
+    return () => {
+      window.clearInterval(interval);
+    };
   }, [goToNext, isPaused]);
 
   const activeMember = teamMembers[activeIndex];
@@ -117,26 +118,37 @@ export default function OurTeamSlider() {
   return (
     <section className="w-full overflow-hidden bg-white py-6 sm:py-10">
       <div className="mx-auto w-full max-w-[1180px] px-4 sm:px-6 lg:px-8">
-        {/* Heading */}
         <motion.h2
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.5 }}
+          initial={{
+            opacity: 0,
+            y: 12,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.4,
+          }}
+          transition={{
+            duration: 0.5,
+            ease: [0.22, 1, 0.36, 1],
+          }}
           className="mb-7 text-[28px] font-semibold leading-none tracking-[-0.7px] text-black sm:text-[34px]"
         >
           Our Team
         </motion.h2>
 
-        {/* Slider */}
         <div
           className="relative"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           onTouchStart={() => setIsPaused(true)}
           onTouchEnd={() => setIsPaused(false)}
+          onTouchCancel={() => setIsPaused(false)}
         >
-          <div className="relative min-h-[180px] overflow-hidden rounded-[19px] sm:min-h-[210px]">
+          <div className="relative h-[190px] overflow-hidden rounded-[19px] sm:h-[200px]">
             <AnimatePresence initial={false} custom={direction} mode="wait">
               <motion.article
                 key={activeMember.id}
@@ -161,26 +173,20 @@ export default function OurTeamSlider() {
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 drag="x"
-                dragConstraints={{ left: 0, right: 0 }}
+                dragConstraints={{
+                  left: 0,
+                  right: 0,
+                }}
                 dragElastic={0.16}
                 dragMomentum={false}
                 onDragEnd={handleDragEnd}
-                className="
-                  absolute inset-0 flex cursor-grab items-center
-                  overflow-hidden rounded-[19px]
-                  bg-[linear-gradient(135deg,#210393_0%,#1334bb_42%,#0086dc_100%)]
-                  px-6 py-7 shadow-[0_16px_40px_rgba(25,45,160,0.18)]
-                  active:cursor-grabbing
-                  sm:px-9 sm:py-8
-                "
+                className="absolute inset-0 flex cursor-grab items-center overflow-hidden rounded-[19px] bg-[linear-gradient(135deg,#210393_0%,#1334bb_42%,#0086dc_100%)] px-6 py-7 shadow-[0_16px_40px_rgba(25,45,160,0.18)] active:cursor-grabbing sm:px-9 sm:py-8"
               >
-                {/* Decorative background glow */}
                 <div className="pointer-events-none absolute -right-20 -top-20 h-[230px] w-[230px] rounded-full bg-white/10 blur-3xl" />
 
                 <div className="pointer-events-none absolute -bottom-20 -left-10 h-[200px] w-[200px] rounded-full bg-[#210393]/45 blur-3xl" />
 
                 <div className="relative z-10 flex w-full items-center gap-6 sm:gap-9">
-                  {/* Profile image */}
                   <div className="relative h-[91px] w-[82px] shrink-0 overflow-hidden rounded-[8px] bg-white shadow-[0_8px_18px_rgba(0,0,0,0.18)] sm:h-[125px] sm:w-[112px]">
                     <Image
                       src={activeMember.image}
@@ -193,17 +199,16 @@ export default function OurTeamSlider() {
                     />
                   </div>
 
-                  {/* Team content */}
                   <div className="min-w-0 flex-1 text-white">
-                    <h3 className="truncate text-[18px] font-semibold leading-tight tracking-[-0.2px] sm:text-[24px]">
+                    <h3 className="text-[18px] font-semibold leading-[1.2] tracking-[-0.2px] sm:text-[24px]">
                       {activeMember.name}
                     </h3>
 
-                    <p className="mt-1.5 text-[15px] font-medium leading-tight text-white/95 sm:mt-2 sm:text-[19px]">
+                    <p className="mt-1.5 text-[15px] font-medium leading-[1.3] text-white/95 sm:mt-2 sm:text-[19px]">
                       {activeMember.designation}
                     </p>
 
-                    <p className="mt-3 line-clamp-2 max-w-[720px] text-[14px] font-normal leading-[1.35] text-white/90 sm:mt-4 sm:text-[17px] sm:leading-[1.45]">
+                    <p className="mt-3 max-w-[720px] whitespace-normal break-words text-[14px] font-normal leading-[1.45] text-white/90 sm:mt-4 sm:text-[17px] sm:leading-[1.5]">
                       {activeMember.description}
                     </p>
                   </div>
@@ -212,7 +217,6 @@ export default function OurTeamSlider() {
             </AnimatePresence>
           </div>
 
-          {/* Slider dots */}
           <div className="mt-5 flex items-center justify-center gap-2">
             {teamMembers.map((member, index) => (
               <button

@@ -4,7 +4,13 @@ import Image from "next/image";
 import { AnimatePresence, motion, PanInfo } from "framer-motion";
 import { Search, X } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 type TherapySearchItem = {
   id: number;
@@ -18,6 +24,11 @@ type GalleryImage = {
   id: number;
   image: string;
   alt: string;
+};
+
+type VisibleGalleryImage = GalleryImage & {
+  stackPosition: number;
+  uniqueKey: string;
 };
 
 const therapyPages: TherapySearchItem[] = [
@@ -103,19 +114,17 @@ const therapyPages: TherapySearchItem[] = [
 const galleryImages: GalleryImage[] = [
   {
     id: 1,
-    image: "/images/mtpt.png",
+    image: "/images/therapy-1.png",
     alt: "SPARRC physiotherapy treatment",
   },
   {
     id: 2,
-    image: "/images/mtpt.png",
-    // image: "/images/therapy-2.png",
+    image: "/images/therapy-2.png",
     alt: "SPARRC rehabilitation treatment",
   },
   {
     id: 3,
-    image: "/images/mtpt.png",
-    // image: "/images/therapy-3.png",
+    image: "/images/therapy-3.png",
     alt: "SPARRC mobility treatment",
   },
 ];
@@ -149,30 +158,44 @@ export default function TherapiesSection() {
     });
   }, [searchValue]);
 
-  const visibleCards = useMemo(() => {
+  const visibleCards = useMemo<VisibleGalleryImage[]>(() => {
     return [0, 1, 2].map((offset) => {
-      const index =
+      const imageIndex =
         (activeIndex + offset) % galleryImages.length;
 
+      const image = galleryImages[imageIndex];
+
       return {
-        ...galleryImages[index],
+        ...image,
         stackPosition: offset,
+
+        // Prevents Framer Motion from reusing the old image card.
+        uniqueKey: `${activeIndex}-${image.id}-${offset}`,
       };
     });
   }, [activeIndex]);
 
-  const goToNextSlide = () => {
+  const goToNextSlide = useCallback(() => {
     setActiveIndex(
-      (current) => (current + 1) % galleryImages.length
+      (currentIndex) =>
+        (currentIndex + 1) % galleryImages.length
     );
-  };
+  }, []);
 
-  const goToPreviousSlide = () => {
+  const goToPreviousSlide = useCallback(() => {
     setActiveIndex(
-      (current) =>
-        (current - 1 + galleryImages.length) %
+      (currentIndex) =>
+        (currentIndex - 1 + galleryImages.length) %
         galleryImages.length
     );
+  }, []);
+
+  const goToSlide = (index: number) => {
+    if (index === activeIndex) {
+      return;
+    }
+
+    setActiveIndex(index);
   };
 
   const selectTherapy = (therapy: TherapySearchItem) => {
@@ -201,11 +224,12 @@ export default function TherapiesSection() {
     _event: MouseEvent | TouchEvent | PointerEvent,
     info: PanInfo
   ) => {
-    if (info.offset.x < -60) {
+    if (info.offset.x <= -60) {
       goToNextSlide();
+      return;
     }
 
-    if (info.offset.x > 60) {
+    if (info.offset.x >= 60) {
       goToPreviousSlide();
     }
   };
@@ -216,13 +240,13 @@ export default function TherapiesSection() {
     }
 
     const interval = window.setInterval(() => {
-      setActiveIndex(
-        (current) => (current + 1) % galleryImages.length
-      );
+      goToNextSlide();
     }, 5500);
 
-    return () => window.clearInterval(interval);
-  }, [isPaused]);
+    return () => {
+      window.clearInterval(interval);
+    };
+  }, [goToNextSlide, isPaused]);
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -257,7 +281,7 @@ export default function TherapiesSection() {
               className="relative z-30"
             >
               <div
-                className={`flex min-h-[58px] items-center rounded-full border bg-white px-4 shadow-[0_5px_22px_rgba(19,34,68,0.06)] transition ${
+                className={`flex min-h-[58px] items-center rounded-full border bg-white px-4 shadow-[0_5px_22px_rgba(19,34,68,0.06)] transition-colors duration-300 ${
                   isSearchFocused
                     ? "border-[#51479d]"
                     : "border-[#e7e7e7]"
@@ -293,7 +317,7 @@ export default function TherapiesSection() {
                   />
                 </div>
 
-                {searchValue && (
+                {searchValue.length > 0 && (
                   <button
                     type="button"
                     onClick={() => {
@@ -301,7 +325,7 @@ export default function TherapiesSection() {
                       setIsSearchFocused(true);
                     }}
                     aria-label="Clear therapy search"
-                    className="ml-2 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#f5f6f8] text-[#182033]"
+                    className="ml-2 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#f5f6f8] text-[#182033] transition-colors hover:bg-[#ebedf2]"
                   >
                     <X size={16} />
                   </button>
@@ -333,13 +357,13 @@ export default function TherapiesSection() {
                         <button
                           key={therapy.id}
                           type="button"
-                          onMouseDown={(event) =>
-                            event.preventDefault()
-                          }
-                          onClick={() =>
-                            selectTherapy(therapy)
-                          }
-                          className="flex w-full items-center gap-3 rounded-[14px] px-3 py-3 text-left transition hover:bg-[#f5f7fa]"
+                          onMouseDown={(event) => {
+                            event.preventDefault();
+                          }}
+                          onClick={() => {
+                            selectTherapy(therapy);
+                          }}
+                          className="flex w-full items-center gap-3 rounded-[14px] px-3 py-3 text-left transition-colors hover:bg-[#f5f7fa]"
                         >
                           <Search
                             size={17}
@@ -368,15 +392,19 @@ export default function TherapiesSection() {
               </AnimatePresence>
             </div>
 
-            {/* Exact original gallery layout */}
+            {/* Gallery */}
             <div
-              className="relative mt-5 h-[340px] w-full"
+              className="relative mt-5 h-[340px] w-full touch-pan-y"
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
               onTouchStart={() => setIsPaused(true)}
               onTouchEnd={() => setIsPaused(false)}
+              onTouchCancel={() => setIsPaused(false)}
             >
-              <AnimatePresence initial={false}>
+              <AnimatePresence
+                initial={false}
+                mode="popLayout"
+              >
                 {visibleCards
                   .slice()
                   .reverse()
@@ -386,10 +414,9 @@ export default function TherapiesSection() {
 
                     return (
                       <motion.div
-                        key={galleryImage.id}
-                        drag={
-                          position === 0 ? "x" : false
-                        }
+                        key={galleryImage.uniqueKey}
+                        layout
+                        drag={position === 0 ? "x" : false}
                         dragConstraints={{
                           left: 0,
                           right: 0,
@@ -400,14 +427,14 @@ export default function TherapiesSection() {
                         initial={{
                           opacity: 0,
                           x: 55,
+                          y: position * 14,
                           scale: 0.92,
                         }}
                         animate={{
                           opacity: 1,
                           x: position * 17,
                           y: position * 14,
-                          scale:
-                            1 - position * 0.055,
+                          scale: 1 - position * 0.055,
                           zIndex: 20 - position,
                         }}
                         exit={{
@@ -417,60 +444,37 @@ export default function TherapiesSection() {
                         }}
                         transition={{
                           x: {
-                            duration: 1.1,
-                            ease: [
-                              0.22,
-                              1,
-                              0.36,
-                              1,
-                            ],
+                            duration: 0.9,
+                            ease: [0.22, 1, 0.36, 1],
                           },
                           y: {
-                            duration: 1.1,
-                            ease: [
-                              0.22,
-                              1,
-                              0.36,
-                              1,
-                            ],
+                            duration: 0.9,
+                            ease: [0.22, 1, 0.36, 1],
                           },
                           scale: {
-                            duration: 1.1,
-                            ease: [
-                              0.22,
-                              1,
-                              0.36,
-                              1,
-                            ],
+                            duration: 0.9,
+                            ease: [0.22, 1, 0.36, 1],
                           },
                           opacity: {
-                            duration: 0.8,
-                            ease: [
-                              0.22,
-                              1,
-                              0.36,
-                              1,
-                            ],
+                            duration: 0.55,
+                            ease: [0.22, 1, 0.36, 1],
                           },
                         }}
                         className={`absolute left-0 top-0 h-[320px] w-[calc(100%-28px)] overflow-hidden rounded-[20px] bg-[#e9e9e9] shadow-[0_15px_38px_rgba(16,29,50,0.12)] will-change-transform ${
                           position === 0
                             ? "cursor-grab active:cursor-grabbing"
-                            : ""
+                            : "pointer-events-none"
                         }`}
                       >
                         <Image
+                          key={galleryImage.image}
                           src={galleryImage.image}
                           alt={galleryImage.alt}
                           fill
-                          priority={position === 0}
+                          priority
                           draggable={false}
                           sizes="(max-width: 640px) 90vw, 370px"
-                          className={`pointer-events-none select-none object-cover transition duration-1000 ${
-                            position === 0
-                              ? "grayscale-0"
-                              : "grayscale"
-                          }`}
+                          className="pointer-events-none select-none object-cover object-center"
                         />
                       </motion.div>
                     );
@@ -478,18 +482,21 @@ export default function TherapiesSection() {
               </AnimatePresence>
             </div>
 
-            {/* Exact original dots */}
+            {/* Slider dots */}
             <div className="mt-2 flex items-center justify-center gap-2">
               {galleryImages.map((galleryImage, index) => (
                 <button
                   key={galleryImage.id}
                   type="button"
-                  onClick={() => setActiveIndex(index)}
+                  onClick={() => goToSlide(index)}
                   aria-label={`View gallery image ${index + 1}`}
+                  aria-current={
+                    activeIndex === index ? "true" : undefined
+                  }
                   className={`h-[6px] rounded-full transition-all duration-300 ${
                     activeIndex === index
                       ? "w-6 bg-[#51479d]"
-                      : "w-[6px] bg-[#d8dae0]"
+                      : "w-[6px] bg-[#d8dae0] hover:bg-[#aeb2bd]"
                   }`}
                 />
               ))}
