@@ -268,11 +268,11 @@ export default function BottomNav({ footerId = "site-footer" }: { footerId?: str
   const results = trimmedQuery === ""
     ? []
     : ALL_SEARCHABLE_ITEMS.filter((item) => {
-        const matchTitle = item.title.toLowerCase().includes(trimmedQuery);
-        const matchDescription = item.description.toLowerCase().includes(trimmedQuery);
-        const matchKeywords = item.keywords?.some((kw) => kw.toLowerCase().includes(trimmedQuery));
-        return matchTitle || matchDescription || matchKeywords;
-      });
+      const matchTitle = item.title.toLowerCase().includes(trimmedQuery);
+      const matchDescription = item.description.toLowerCase().includes(trimmedQuery);
+      const matchKeywords = item.keywords?.some((kw) => kw.toLowerCase().includes(trimmedQuery));
+      return matchTitle || matchDescription || matchKeywords;
+    });
 
   const goTo = (href: string) => {
     setSearchOpen(false);
@@ -287,7 +287,7 @@ export default function BottomNav({ footerId = "site-footer" }: { footerId?: str
         animate={{ y: hidden ? 120 : 0, opacity: hidden ? 0 : 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 28 }}
         style={{ pointerEvents: hidden ? "none" : "auto" }}
-        className="fixed inset-x-4 bottom-5 z-[999] isolate mx-auto flex h-[76px] max-w-md items-center justify-around rounded-full bg-white px-3 shadow-[0_10px_35px_rgba(0,0,0,0.08)] border border-gray-100/60"
+        className="fixed inset-x-4 bottom-5 z-[999] isolate mx-auto flex h-[76px] max-w-md items-center justify-around rounded-full border border-neutral-300/90 bg-white px-3 shadow-[0_10px_35px_rgba(0,0,0,0.08)]"
       >
         {NAV_ITEMS.map((item) => {
           const Icon = item.icon;
@@ -295,7 +295,7 @@ export default function BottomNav({ footerId = "site-footer" }: { footerId?: str
           // Center Plus Button ("Theraphy")
           if (item.isCenter) {
             // Active if exact match OR if navigating any sub-page of /therapies
-            const isActive = item.href 
+            const isActive = item.href
               ? pathname === item.href || pathname.startsWith("/therapies") || pathname.startsWith("/theraphy")
               : false;
 
