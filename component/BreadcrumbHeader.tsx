@@ -11,7 +11,6 @@ type BreadcrumbHeaderProps = {
 
 const PAGE_TITLES: Record<string, string> = {
   "/therapy": "All Therapies",
-  "/therapies": "All Therapies",
   "/about": "About Us",
   "/contact": "Contact Us",
   "/gallery": "Gallery",

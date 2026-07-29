@@ -86,7 +86,7 @@ export default function Header() {
             </a>
 
             <a
-              href="/therapies"
+              href="/therapy"
               className="text-lg font-light text-gray-900"
             >
               Therapies

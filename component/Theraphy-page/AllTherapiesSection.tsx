@@ -81,7 +81,7 @@ const THERAPIES: TherapyItem[] = [
     description:
       "Trigger point therapy to relieve chronic muscle pain",
     image: "/images/mtpt-01.png",
-    href: "/therapies/mtpt",
+    href: "/therapy/mtpt",
     keywords: [
       "MTPT",
       "myofascial",
@@ -97,7 +97,7 @@ const THERAPIES: TherapyItem[] = [
     description:
       "Pulsed electromagnetic field therapy for healing",
     image: "/images/pemf-01.png",
-    href: "/therapies/pemf",
+    href: "/therapy/pemf",
     keywords: [
       "PEMF",
       "electromagnetic",
@@ -113,7 +113,7 @@ const THERAPIES: TherapyItem[] = [
     description:
       "Core physical therapy for movement restoration",
     image: "/images/physiotherapy-01.png",
-    href: "/therapies/physiotherapy",
+    href: "/therapy/physiotherapy",
     keywords: [
       "physical therapy",
       "movement",
@@ -128,7 +128,7 @@ const THERAPIES: TherapyItem[] = [
     description:
       "Therapeutic exercises in a supervised group setting",
     image: "/images/group-therapy-01.png",
-    href: "/therapies/group-therapy",
+    href: "/therapy/group-therapy",
     keywords: [
       "group exercise",
       "rehabilitation",
@@ -143,7 +143,7 @@ const THERAPIES: TherapyItem[] = [
     description:
       "Yoga-based interventions for rehab and wellness",
     image: "/images/yoga-therapy-01.png",
-    href: "/therapies/yoga-therapy",
+    href: "/therapy/yoga-therapy",
     keywords: ["yoga", "wellness", "rehabilitation"],
   },
   {
@@ -154,7 +154,7 @@ const THERAPIES: TherapyItem[] = [
     description:
       "Improving movement patterns for daily life",
     image: "/images/functional-training-01.png",
-    href: "/therapies/functional-training",
+    href: "/therapy/functional-training",
     keywords: [
       "fitness",
       "movement",
@@ -170,7 +170,7 @@ const THERAPIES: TherapyItem[] = [
     description:
       "Tailor-made exercise plans for specific conditions",
     image: "/images/prescription-exercise-01.png",
-    href: "/therapies/prescription-exercise",
+    href: "/therapy/prescription-exercise",
     keywords: [
       "exercise",
       "prescription",
@@ -186,7 +186,7 @@ const THERAPIES: TherapyItem[] = [
     description:
       "Massage therapy for athletes and sportspersons",
     image: "/images/sports-massage-01.png",
-    href: "/therapies/sports-massage",
+    href: "/therapy/sports-massage",
     keywords: [
       "sports",
       "massage",
@@ -202,7 +202,7 @@ const THERAPIES: TherapyItem[] = [
     description:
       "Water-based therapeutic exercises for recovery",
     image: "/images/aquatherapy-01.png",
-    href: "/therapies/aquatherapy",
+    href: "/therapy/aquatherapy",
     keywords: [
       "aqua therapy",
       "hydrotherapy",
@@ -218,7 +218,7 @@ const THERAPIES: TherapyItem[] = [
     description:
       "Ancient Indian martial art as therapeutic movement",
     image: "/images/kalaripayattu-01.png",
-    href: "/therapies/kalaripayattu",
+    href: "/therapy/kalaripayattu",
     keywords: [
       "kalari",
       "martial art",
@@ -234,7 +234,7 @@ const THERAPIES: TherapyItem[] = [
     description:
       "Gentle manipulation of the craniosacral system",
     image: "/images/cranio-sacral-01.png",
-    href: "/therapies/cranio-sacral",
+    href: "/therapy/cranio-sacral",
     keywords: [
       "craniosacral",
       "relaxation",
@@ -249,7 +249,7 @@ const THERAPIES: TherapyItem[] = [
     description:
       "Breathing and sound practice for body relaxation",
     image: "/images/six-healing-sounds-01.png",
-    href: "/therapies/six-healing-sounds",
+    href: "/therapy/six-healing-sounds",
     keywords: [
       "healing sounds",
       "breathing",
