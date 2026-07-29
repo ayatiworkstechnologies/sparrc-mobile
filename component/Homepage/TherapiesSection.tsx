@@ -97,10 +97,10 @@ const therapyPages: TherapySearchItem[] = [
   },
   {
     id: 10,
-    name: "Alternate Therapy",
-    description: "Alternative Therapeutic Treatments",
-    keywords: ["Alternative Therapy"],
-    href: "/therapy/alternate-therapy",
+    name: "Cranio Sacral Therapy",
+    description: "Cranio Sacral Therapy Treatments",
+    keywords: ["Craniosacral Therapy", "Alternative Therapy"],
+    href: "/therapy/cranio-sacral",
   },
   {
     id: 11,
@@ -109,6 +109,13 @@ const therapyPages: TherapySearchItem[] = [
     keywords: ["Fitness Therapy", "Functional Exercise"],
     href: "/therapy/functional-training",
   },
+  {
+    id: 12,
+    name: "Six Healing Sounds",
+    description: "Breathing and Sound Practice for Body Relaxation",
+    keywords: ["Healing Sounds", "Breathing Therapy"],
+    href: "/therapy/six-healing-sounds",
+  }, 
 ];
 
 const galleryImages: GalleryImage[] = [
