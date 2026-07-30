@@ -719,8 +719,8 @@ export default function BottomNav({
 
   return (
     <>
-      {/* iOS Safari: prevent automatic zoom when focusing form fields. */}
-      <style jsx global>{`
+      {/* iOS Safari prevents automatic focus zoom for fields under 16px. */}
+      <style>{`
         @supports (-webkit-touch-callout: none) {
           input.ios-no-zoom-field,
           textarea.ios-no-zoom-field {
