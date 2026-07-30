@@ -32,7 +32,7 @@ const mtptDetails: TherapyInfoItem[] = [
     label: "Format",
     value: "Individual",
   },
-  {
+  {     
     id: 4,
     icon: "/icons/consultation.svg",
     iconAlt: "Clinic consultation icon",
@@ -60,12 +60,12 @@ const mtptBestFor: string[] = [
 
 export default function MtptPage() {
   return (
-    <main className="w-full overflow-hidden pt-[55px]">
+    <main className="w-full overflow-hidden pt-[70px]">
       <TherapyBanner
         src="/images/mtpt-banner.png"
         alt="Therapist providing Myofascial Trigger Point Therapy"
         priority
-      />
+      />      
 
       <TherapyInfoCard
         title="Myofascial Trigger Point Therapy"

@@ -7,30 +7,30 @@ import TherapyInfoCard, {
 import TherapyAboutSection from "../../../component/Therapydetails/TherapyAboutSection";
 
 /* -------------------------------------------------------------------------- */
-/* PEMF information                                                           */
+/* Kalari Therapy information                                                 */
 /* -------------------------------------------------------------------------- */
 
-const pemfDetails: TherapyInfoItem[] = [
+const kalariTherapyDetails: TherapyInfoItem[] = [
   {
     id: 1,
     icon: "/icons/duration.svg",
     iconAlt: "Duration icon",
     label: "Duration",
-    value: "30–45 mins",
+    value: "60 mins",
   },
   {
     id: 2,
     icon: "/icons/session-type.svg",
     iconAlt: "Session type icon",
     label: "Session Type",
-    value: "Treatment",
+    value: "Training",
   },
   {
     id: 3,
-    icon: "/icons/format.svg",
-    iconAlt: "Individual session icon",
+    icon: "/icons/groups.svg",
+    iconAlt: "Individual Kalari Therapy session icon",
     label: "Format",
-    value: "Individual",
+    value: "Group / Individual",
   },
   {
     id: 4,
@@ -45,38 +45,38 @@ const pemfDetails: TherapyInfoItem[] = [
 /* Best-for categories                                                        */
 /* -------------------------------------------------------------------------- */
 
-const pemfBestFor: string[] = [
-  "Chronic Pain",
-  "Osteoarthritis",
-  "Sports Recovery",
-  "Post-Surgical Healing",
-  "Nerve Pain",
-  "Muscle Fatigue",
+const kalariTherapyBestFor: string[] = [
+  "Agility Training",
+  "Muscle Conditioning",
+  "Flexibility Enhancement",
+  "Focus & Concentration",
+  "Body Awareness",
+  "Functional Movement",
 ];
 
 /* -------------------------------------------------------------------------- */
 /* Page                                                                       */
 /* -------------------------------------------------------------------------- */
 
-export default function PemfPage() {
+export default function KalaripayattuPage() {
   return (
-    <main className="w-full overflow-hidden pt-[70px]">
+    <main className="w-full overflow-hidden pt-[75px]">
       <TherapyBanner
-        src="/images/pemf-banner.png"
-        alt="Patient receiving Pulsed Electromagnetic Field Therapy"
+        src="/images/kalaripayattu-banner.png"
+        alt="Participant practicing guided Kalari Therapy movements"
         priority
       />
 
       <TherapyInfoCard
-        title="PEMF Therapy"
-        description="Heal Naturally. Recharge Your Body. Move Without Pain."
-        items={pemfDetails}
+        title="Kalari Therapy"
+        description="Strengthen Your Body. Sharpen Your Mind."
+        items={kalariTherapyDetails}
       />
 
       <TherapyAboutSection
-        currentTherapyId="pemf"
-        description="Experience advanced electromagnetic therapy designed to relieve pain, accelerate healing, and improve overall physical function. Our PEMF sessions are customized to support recovery, reduce inflammation, and enhance your body's natural regenerative abilities."
-        bestFor={pemfBestFor}
+        currentTherapyId="kalaripayattu"
+        description="Kalari Therapy is a holistic movement program that develops physical strength, agility, flexibility, and mental focus through structured training. Every session is designed to improve movement quality, body control, and overall wellness."
+        bestFor={kalariTherapyBestFor}
       />
     </main>
   );

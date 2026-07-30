@@ -304,7 +304,7 @@ export default function TherapyAboutSection({
     <section
       className={`w-full overflow-hidden bg-[#ffff] ${className}`}
     >
-      <div className="mx-auto w-full max-w-[636px] px-[12px] pb-[34px] pt-[10px] sm:px-[19px]">
+      <div className="mx-auto w-full max-w-[636px] px-[19px] pb-[34px] pt-[10px] sm:px-[19px]">
         {/* About the Service */}
         <motion.div
           variants={shouldReduceMotion ? undefined : contentVariants}
@@ -321,7 +321,7 @@ export default function TherapyAboutSection({
               shouldReduceMotion ? undefined : headingVariants
             }
             className="
-              text-[16px]
+              text-[19px]
               font-semibold
               leading-[1.4]
               text-[#222222]
@@ -338,7 +338,7 @@ export default function TherapyAboutSection({
             className="
               mt-[14px]
               max-w-[600px]
-              text-[14px]
+              text-[15px]
               font-normal
               leading-[1.7]
               text-[#7a7a7a]
@@ -366,11 +366,11 @@ export default function TherapyAboutSection({
               shouldReduceMotion ? undefined : headingVariants
             }
             className="
-              text-[16px]
+              text-[19px]
               font-semibold
               leading-[1.4]
               text-[#222222]
-              sm:text-[17px]
+              sm:text-[19px]
             "
           >
             Best For
@@ -434,13 +434,13 @@ export default function TherapyAboutSection({
                   bg-white
                   px-[13px]
                   py-[8px]
-                  text-[12px]
+                  text-[13px]
                   font-medium
                   leading-none
                   text-[#333333]
                   shadow-[0_7px_22px_rgba(15,23,42,0.035)]
                   sm:px-[15px]
-                  sm:text-[13px]
+                  sm:text-[12px]
                 "
               >
                 {item}
@@ -466,11 +466,11 @@ export default function TherapyAboutSection({
               shouldReduceMotion ? undefined : headingVariants
             }
             className="
-              text-[16px]
+              text-[19px]
               font-semibold
               leading-[1.4]
               text-[#222222]
-              sm:text-[17px]
+              sm:text-[19px]
             "
           >
             Other Therapy

@@ -7,30 +7,30 @@ import TherapyInfoCard, {
 import TherapyAboutSection from "../../../component/Therapydetails/TherapyAboutSection";
 
 /* -------------------------------------------------------------------------- */
-/* PEMF information                                                           */
+/* Group Therapy information                                                  */
 /* -------------------------------------------------------------------------- */
 
-const pemfDetails: TherapyInfoItem[] = [
+const groupTherapyDetails: TherapyInfoItem[] = [
   {
     id: 1,
     icon: "/icons/duration.svg",
     iconAlt: "Duration icon",
     label: "Duration",
-    value: "30–45 mins",
+    value: "60 mins",
   },
   {
     id: 2,
     icon: "/icons/session-type.svg",
     iconAlt: "Session type icon",
     label: "Session Type",
-    value: "Treatment",
+    value: "Wellness Program",
   },
   {
     id: 3,
-    icon: "/icons/format.svg",
-    iconAlt: "Individual session icon",
+    icon: "/icons/groups.svg",
+    iconAlt: "Group session icon",
     label: "Format",
-    value: "Individual",
+    value: "Group",
   },
   {
     id: 4,
@@ -45,38 +45,38 @@ const pemfDetails: TherapyInfoItem[] = [
 /* Best-for categories                                                        */
 /* -------------------------------------------------------------------------- */
 
-const pemfBestFor: string[] = [
-  "Chronic Pain",
-  "Osteoarthritis",
-  "Sports Recovery",
-  "Post-Surgical Healing",
-  "Nerve Pain",
-  "Muscle Fatigue",
+const groupTherapyBestFor: string[] = [
+  "Stress Relief",
+  "Improving Mobility",
+  "Social Connection",
+  "Building Confidence",
+  "Maintaining Fitness",
+  "Mental Wellness",
 ];
 
 /* -------------------------------------------------------------------------- */
 /* Page                                                                       */
 /* -------------------------------------------------------------------------- */
 
-export default function PemfPage() {
+export default function GroupTherapyPage() {
   return (
     <main className="w-full overflow-hidden pt-[70px]">
       <TherapyBanner
-        src="/images/pemf-banner.png"
-        alt="Patient receiving Pulsed Electromagnetic Field Therapy"
+        src="/images/group-therapy-banner.png"
+        alt="People participating in a guided group therapy session"
         priority
       />
 
       <TherapyInfoCard
-        title="PEMF Therapy"
-        description="Heal Naturally. Recharge Your Body. Move Without Pain."
-        items={pemfDetails}
+        title="Group Therapy"
+        description="Connect. Participate. Grow Together."
+        items={groupTherapyDetails}
       />
 
       <TherapyAboutSection
-        currentTherapyId="pemf"
-        description="Experience advanced electromagnetic therapy designed to relieve pain, accelerate healing, and improve overall physical function. Our PEMF sessions are customized to support recovery, reduce inflammation, and enhance your body's natural regenerative abilities."
-        bestFor={pemfBestFor}
+        currentTherapyId="group-therapy"
+        description="Group Therapy brings people together to improve physical and mental well-being through guided activities, movement sessions, and social interaction. These sessions help reduce stress, improve fitness, build confidence"
+        bestFor={groupTherapyBestFor}
       />
     </main>
   );

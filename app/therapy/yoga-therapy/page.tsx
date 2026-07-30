@@ -7,16 +7,16 @@ import TherapyInfoCard, {
 import TherapyAboutSection from "../../../component/Therapydetails/TherapyAboutSection";
 
 /* -------------------------------------------------------------------------- */
-/* PEMF information                                                           */
+/* Yoga Therapy information                                                   */
 /* -------------------------------------------------------------------------- */
 
-const pemfDetails: TherapyInfoItem[] = [
+const yogaTherapyDetails: TherapyInfoItem[] = [
   {
     id: 1,
     icon: "/icons/duration.svg",
     iconAlt: "Duration icon",
     label: "Duration",
-    value: "30–45 mins",
+    value: "45–60 mins",
   },
   {
     id: 2,
@@ -27,10 +27,10 @@ const pemfDetails: TherapyInfoItem[] = [
   },
   {
     id: 3,
-    icon: "/icons/format.svg",
+    icon: "/icons/groups.svg",
     iconAlt: "Individual session icon",
     label: "Format",
-    value: "Individual",
+    value: "Group / Individual",
   },
   {
     id: 4,
@@ -45,38 +45,38 @@ const pemfDetails: TherapyInfoItem[] = [
 /* Best-for categories                                                        */
 /* -------------------------------------------------------------------------- */
 
-const pemfBestFor: string[] = [
-  "Chronic Pain",
-  "Osteoarthritis",
-  "Sports Recovery",
-  "Post-Surgical Healing",
-  "Nerve Pain",
-  "Muscle Fatigue",
+const yogaTherapyBestFor: string[] = [
+  "Pain Relief",
+  "Better Flexibility",
+  "Improved Posture",
+  "Stress Relief",
+  "Better Sleep",
+  "Mental Wellness",
 ];
 
 /* -------------------------------------------------------------------------- */
 /* Page                                                                       */
 /* -------------------------------------------------------------------------- */
 
-export default function PemfPage() {
+export default function YogaTherapyPage() {
   return (
-    <main className="w-full overflow-hidden pt-[70px]">
+    <main className="w-full overflow-hidden pt-[75px]">
       <TherapyBanner
-        src="/images/pemf-banner.png"
-        alt="Patient receiving Pulsed Electromagnetic Field Therapy"
+        src="/images/yoga-therapy-banner.png"
+        alt="Guided yoga therapy session for physical and mental well-being"
         priority
       />
 
       <TherapyInfoCard
-        title="PEMF Therapy"
-        description="Heal Naturally. Recharge Your Body. Move Without Pain."
-        items={pemfDetails}
+        title="Yoga Therapy"
+        description="Breathe Better! Live Healthier!"
+        items={yogaTherapyDetails}
       />
 
       <TherapyAboutSection
-        currentTherapyId="pemf"
-        description="Experience advanced electromagnetic therapy designed to relieve pain, accelerate healing, and improve overall physical function. Our PEMF sessions are customized to support recovery, reduce inflammation, and enhance your body's natural regenerative abilities."
-        bestFor={pemfBestFor}
+        currentTherapyId="yoga-therapy"
+        description="Yoga Therapy combines guided breathing, gentle postures, meditation, and relaxation techniques to support both physical and mental well-being. Our personalized sessions help improve flexibility, reduce stress, manage pain, and promote overall health through a holistic approach."
+        bestFor={yogaTherapyBestFor}
       />
     </main>
   );

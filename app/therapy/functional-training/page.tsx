@@ -7,28 +7,28 @@ import TherapyInfoCard, {
 import TherapyAboutSection from "../../../component/Therapydetails/TherapyAboutSection";
 
 /* -------------------------------------------------------------------------- */
-/* PEMF information                                                           */
+/* Functional Training information                                            */
 /* -------------------------------------------------------------------------- */
 
-const pemfDetails: TherapyInfoItem[] = [
+const functionalTrainingDetails: TherapyInfoItem[] = [
   {
     id: 1,
     icon: "/icons/duration.svg",
     iconAlt: "Duration icon",
     label: "Duration",
-    value: "30–45 mins",
+    value: "45–60 mins",
   },
   {
     id: 2,
     icon: "/icons/session-type.svg",
     iconAlt: "Session type icon",
     label: "Session Type",
-    value: "Treatment",
+    value: "Rehabilitation",
   },
   {
     id: 3,
     icon: "/icons/format.svg",
-    iconAlt: "Individual session icon",
+    iconAlt: "Individual training icon",
     label: "Format",
     value: "Individual",
   },
@@ -45,38 +45,38 @@ const pemfDetails: TherapyInfoItem[] = [
 /* Best-for categories                                                        */
 /* -------------------------------------------------------------------------- */
 
-const pemfBestFor: string[] = [
-  "Chronic Pain",
-  "Osteoarthritis",
-  "Sports Recovery",
-  "Post-Surgical Healing",
-  "Nerve Pain",
-  "Muscle Fatigue",
+const functionalTrainingBestFor: string[] = [
+  "Everyday Movement",
+  "Core Stability",
+  "Balance & Coordination",
+  "Strength Building",
+  "Injury Prevention",
+  "Active Lifestyle",
 ];
 
 /* -------------------------------------------------------------------------- */
 /* Page                                                                       */
 /* -------------------------------------------------------------------------- */
 
-export default function PemfPage() {
+export default function FunctionalTrainingPage() {
   return (
     <main className="w-full overflow-hidden pt-[70px]">
       <TherapyBanner
-        src="/images/pemf-banner.png"
-        alt="Patient receiving Pulsed Electromagnetic Field Therapy"
+        src="/images/functional-training-banner.png"
+        alt="Person performing guided functional training exercises"
         priority
       />
 
       <TherapyInfoCard
-        title="PEMF Therapy"
-        description="Heal Naturally. Recharge Your Body. Move Without Pain."
-        items={pemfDetails}
+        title="Functional Training"
+        description="Train for Life. Move with Confidence."
+        items={functionalTrainingDetails}
       />
 
       <TherapyAboutSection
-        currentTherapyId="pemf"
-        description="Experience advanced electromagnetic therapy designed to relieve pain, accelerate healing, and improve overall physical function. Our PEMF sessions are customized to support recovery, reduce inflammation, and enhance your body's natural regenerative abilities."
-        bestFor={pemfBestFor}
+        currentTherapyId="functional-training"
+        description="Functional Training is designed to improve the way you move in everyday life. Through personalized exercises, our therapists help build strength, enhance balance, improve flexibility, and increase endurance, making daily activities easier"
+        bestFor={functionalTrainingBestFor}
       />
     </main>
   );

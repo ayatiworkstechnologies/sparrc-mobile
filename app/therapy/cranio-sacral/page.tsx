@@ -7,16 +7,16 @@ import TherapyInfoCard, {
 import TherapyAboutSection from "../../../component/Therapydetails/TherapyAboutSection";
 
 /* -------------------------------------------------------------------------- */
-/* PEMF information                                                           */
+/* Cranio Sacral Therapy information                                          */
 /* -------------------------------------------------------------------------- */
 
-const pemfDetails: TherapyInfoItem[] = [
+const cranioSacralDetails: TherapyInfoItem[] = [
   {
     id: 1,
     icon: "/icons/duration.svg",
     iconAlt: "Duration icon",
     label: "Duration",
-    value: "30–45 mins",
+    value: "45–60 mins",
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ const pemfDetails: TherapyInfoItem[] = [
   {
     id: 3,
     icon: "/icons/format.svg",
-    iconAlt: "Individual session icon",
+    iconAlt: "Individual Cranio Sacral Therapy session icon",
     label: "Format",
     value: "Individual",
   },
@@ -45,38 +45,38 @@ const pemfDetails: TherapyInfoItem[] = [
 /* Best-for categories                                                        */
 /* -------------------------------------------------------------------------- */
 
-const pemfBestFor: string[] = [
-  "Chronic Pain",
-  "Osteoarthritis",
-  "Sports Recovery",
-  "Post-Surgical Healing",
-  "Nerve Pain",
-  "Muscle Fatigue",
+const cranioSacralBestFor: string[] = [
+  "Tension Headaches",
+  "Stress Management",
+  "Chronic Fatigue",
+  "Muscle Tension",
+  "Emotional Wellness",
+  "Relaxation Therapy",
 ];
 
 /* -------------------------------------------------------------------------- */
 /* Page                                                                       */
 /* -------------------------------------------------------------------------- */
 
-export default function PemfPage() {
+export default function CranioSacralPage() {
   return (
     <main className="w-full overflow-hidden pt-[70px]">
       <TherapyBanner
-        src="/images/pemf-banner.png"
-        alt="Patient receiving Pulsed Electromagnetic Field Therapy"
+        src="/images/cranio-sacral-banner.png"
+        alt="Therapist providing gentle Cranio Sacral Therapy treatment"
         priority
       />
 
       <TherapyInfoCard
-        title="PEMF Therapy"
-        description="Heal Naturally. Recharge Your Body. Move Without Pain."
-        items={pemfDetails}
+        title="Cranio Sacral Therapy (CST)"
+        description="Gentle Touch. Deep Healing. Lasting Relief."
+        items={cranioSacralDetails}
       />
 
       <TherapyAboutSection
-        currentTherapyId="pemf"
-        description="Experience advanced electromagnetic therapy designed to relieve pain, accelerate healing, and improve overall physical function. Our PEMF sessions are customized to support recovery, reduce inflammation, and enhance your body's natural regenerative abilities."
-        bestFor={pemfBestFor}
+        currentTherapyId="cranio-sacral"
+        description="CST is a gentle manual therapy designed to release restrictions within the craniosacral system. Through light-touch techniques, our therapists help relieve tension, improve circulation of cerebrospinal fluid, and support physical and emotional well-being."
+        bestFor={cranioSacralBestFor}
       />
     </main>
   );

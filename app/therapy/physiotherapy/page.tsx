@@ -7,16 +7,16 @@ import TherapyInfoCard, {
 import TherapyAboutSection from "../../../component/Therapydetails/TherapyAboutSection";
 
 /* -------------------------------------------------------------------------- */
-/* PEMF information                                                           */
+/* Physiotherapy information                                                  */
 /* -------------------------------------------------------------------------- */
 
-const pemfDetails: TherapyInfoItem[] = [
+const physiotherapyDetails: TherapyInfoItem[] = [
   {
     id: 1,
     icon: "/icons/duration.svg",
     iconAlt: "Duration icon",
     label: "Duration",
-    value: "30–45 mins",
+    value: "45–60 mins",
   },
   {
     id: 2,
@@ -45,38 +45,38 @@ const pemfDetails: TherapyInfoItem[] = [
 /* Best-for categories                                                        */
 /* -------------------------------------------------------------------------- */
 
-const pemfBestFor: string[] = [
+const physiotherapyBestFor: string[] = [
   "Chronic Pain",
-  "Osteoarthritis",
-  "Sports Recovery",
-  "Post-Surgical Healing",
-  "Nerve Pain",
-  "Muscle Fatigue",
+  "Sports Injuries",
+  "Joint Disorders",
+  "Post-Operative Care",
+  "Muscle Weakness",
+  "Balance Training",
 ];
 
 /* -------------------------------------------------------------------------- */
 /* Page                                                                       */
 /* -------------------------------------------------------------------------- */
 
-export default function PemfPage() {
+export default function PhysiotherapyPage() {
   return (
     <main className="w-full overflow-hidden pt-[70px]">
       <TherapyBanner
-        src="/images/pemf-banner.png"
-        alt="Patient receiving Pulsed Electromagnetic Field Therapy"
+        src="/images/physiotherapy-banner.png"
+        alt="Physiotherapist helping a patient improve movement and recovery"
         priority
       />
 
       <TherapyInfoCard
-        title="PEMF Therapy"
-        description="Heal Naturally. Recharge Your Body. Move Without Pain."
-        items={pemfDetails}
+        title="Physiotherapy"
+        description="Recover Stronger! Move Freely! Live Comfortably!"
+        items={physiotherapyDetails}
       />
 
       <TherapyAboutSection
-        currentTherapyId="pemf"
-        description="Experience advanced electromagnetic therapy designed to relieve pain, accelerate healing, and improve overall physical function. Our PEMF sessions are customized to support recovery, reduce inflammation, and enhance your body's natural regenerative abilities."
-        bestFor={pemfBestFor}
+        currentTherapyId="physiotherapy"
+        description="Our physiotherapy sessions are designed to reduce pain, improve flexibility, and restore movement. Using personalized treatment techniques and guided rehabilitation, our experts help you recover safely and regain confidence in your daily activities."
+        bestFor={physiotherapyBestFor}
       />
     </main>
   );

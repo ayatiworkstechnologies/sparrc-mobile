@@ -7,23 +7,23 @@ import TherapyInfoCard, {
 import TherapyAboutSection from "../../../component/Therapydetails/TherapyAboutSection";
 
 /* -------------------------------------------------------------------------- */
-/* PEMF information                                                           */
+/* Sports Massage information                                                 */
 /* -------------------------------------------------------------------------- */
 
-const pemfDetails: TherapyInfoItem[] = [
+const sportsMassageDetails: TherapyInfoItem[] = [
   {
     id: 1,
     icon: "/icons/duration.svg",
     iconAlt: "Duration icon",
     label: "Duration",
-    value: "30–45 mins",
+    value: "45–60 mins",
   },
   {
     id: 2,
     icon: "/icons/session-type.svg",
     iconAlt: "Session type icon",
     label: "Session Type",
-    value: "Treatment",
+    value: "Rehabilitation",
   },
   {
     id: 3,
@@ -45,38 +45,38 @@ const pemfDetails: TherapyInfoItem[] = [
 /* Best-for categories                                                        */
 /* -------------------------------------------------------------------------- */
 
-const pemfBestFor: string[] = [
-  "Chronic Pain",
-  "Osteoarthritis",
-  "Sports Recovery",
-  "Post-Surgical Healing",
-  "Nerve Pain",
-  "Muscle Fatigue",
+const sportsMassageBestFor: string[] = [
+  "Competitive Athletes",
+  "Fitness Enthusiasts",
+  "Running & Cycling Recovery",
+  "Muscle Relaxation",
+  "Injury Rehabilitation",
+  "Performance Maintenance",
 ];
 
 /* -------------------------------------------------------------------------- */
 /* Page                                                                       */
 /* -------------------------------------------------------------------------- */
 
-export default function PemfPage() {
+export default function SportsMassagePage() {
   return (
     <main className="w-full overflow-hidden pt-[70px]">
       <TherapyBanner
-        src="/images/pemf-banner.png"
-        alt="Patient receiving Pulsed Electromagnetic Field Therapy"
+        src="/images/sports-massage-banner.png"
+        alt="Therapist providing sports massage treatment to an athlete"
         priority
       />
 
       <TherapyInfoCard
-        title="PEMF Therapy"
-        description="Heal Naturally. Recharge Your Body. Move Without Pain."
-        items={pemfDetails}
+        title="Sports Massage"
+        description="Keep Moving. Keep Competing. Keep Improving."
+        items={sportsMassageDetails}
       />
 
       <TherapyAboutSection
-        currentTherapyId="pemf"
-        description="Experience advanced electromagnetic therapy designed to relieve pain, accelerate healing, and improve overall physical function. Our PEMF sessions are customized to support recovery, reduce inflammation, and enhance your body's natural regenerative abilities."
-        bestFor={pemfBestFor}
+        currentTherapyId="sports-massage"
+        description="Designed for athletes and active individuals, Sports Massage helps optimize muscle health through specialized hands-on techniques. It reduces soreness, improves flexibility, supports injury recovery, and prepares your body for better performance."
+        bestFor={sportsMassageBestFor}
       />
     </main>
   );

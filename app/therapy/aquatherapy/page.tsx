@@ -7,30 +7,30 @@ import TherapyInfoCard, {
 import TherapyAboutSection from "../../../component/Therapydetails/TherapyAboutSection";
 
 /* -------------------------------------------------------------------------- */
-/* PEMF information                                                           */
+/* Aquatherapy information                                                    */
 /* -------------------------------------------------------------------------- */
 
-const pemfDetails: TherapyInfoItem[] = [
+const aquatherapyDetails: TherapyInfoItem[] = [
   {
     id: 1,
     icon: "/icons/duration.svg",
     iconAlt: "Duration icon",
     label: "Duration",
-    value: "30–45 mins",
+    value: "45–60 mins",
   },
   {
     id: 2,
     icon: "/icons/session-type.svg",
     iconAlt: "Session type icon",
     label: "Session Type",
-    value: "Treatment",
+    value: "Aquatic Therapy",
   },
   {
     id: 3,
-    icon: "/icons/format.svg",
-    iconAlt: "Individual session icon",
+    icon: "/icons/format-1.svg",
+    iconAlt: "Individual aquatherapy session icon",
     label: "Format",
-    value: "Individual",
+    value: "Supervised",
   },
   {
     id: 4,
@@ -45,38 +45,38 @@ const pemfDetails: TherapyInfoItem[] = [
 /* Best-for categories                                                        */
 /* -------------------------------------------------------------------------- */
 
-const pemfBestFor: string[] = [
-  "Chronic Pain",
-  "Osteoarthritis",
-  "Sports Recovery",
-  "Post-Surgical Healing",
-  "Nerve Pain",
-  "Muscle Fatigue",
+const aquatherapyBestFor: string[] = [
+  "Joint Mobility",
+  "Arthritis Care",
+  "Muscle Recovery",
+  "Balance Improvement",
+  "Sports Rehabilitation",
+  "Physical Wellness",
 ];
 
 /* -------------------------------------------------------------------------- */
 /* Page                                                                       */
 /* -------------------------------------------------------------------------- */
 
-export default function PemfPage() {
+export default function AquatherapyPage() {
   return (
     <main className="w-full overflow-hidden pt-[70px]">
       <TherapyBanner
-        src="/images/pemf-banner.png"
-        alt="Patient receiving Pulsed Electromagnetic Field Therapy"
+        src="/images/aquatherapy-banner.png"
+        alt="Patient participating in a guided aquatherapy rehabilitation session"
         priority
       />
 
       <TherapyInfoCard
-        title="PEMF Therapy"
-        description="Heal Naturally. Recharge Your Body. Move Without Pain."
-        items={pemfDetails}
+        title="Aquatherapy"
+        description="Experience the Healing Power of Water."
+        items={aquatherapyDetails}
       />
 
       <TherapyAboutSection
-        currentTherapyId="pemf"
-        description="Experience advanced electromagnetic therapy designed to relieve pain, accelerate healing, and improve overall physical function. Our PEMF sessions are customized to support recovery, reduce inflammation, and enhance your body's natural regenerative abilities."
-        bestFor={pemfBestFor}
+        currentTherapyId="aquatherapy"
+        description="Aquatherapy is a specialized water-based rehabilitation program that uses the natural buoyancy and resistance of water to support pain-free movement. It helps improve strength, flexibility, balance, and endurance while reducing stress on joints and muscles. Every session is customized to help you recover comfortably and confidently."
+        bestFor={aquatherapyBestFor}
       />
     </main>
   );

@@ -7,28 +7,28 @@ import TherapyInfoCard, {
 import TherapyAboutSection from "../../../component/Therapydetails/TherapyAboutSection";
 
 /* -------------------------------------------------------------------------- */
-/* PEMF information                                                           */
+/* Six Healing Sounds information                                             */
 /* -------------------------------------------------------------------------- */
 
-const pemfDetails: TherapyInfoItem[] = [
+const sixHealingSoundsDetails: TherapyInfoItem[] = [
   {
     id: 1,
     icon: "/icons/duration.svg",
     iconAlt: "Duration icon",
     label: "Duration",
-    value: "30–45 mins",
+    value: "45 mins",
   },
   {
     id: 2,
     icon: "/icons/session-type.svg",
     iconAlt: "Session type icon",
     label: "Session Type",
-    value: "Treatment",
+    value: "Therapy",
   },
   {
     id: 3,
     icon: "/icons/format.svg",
-    iconAlt: "Individual session icon",
+    iconAlt: "Individual sound healing session icon",
     label: "Format",
     value: "Individual",
   },
@@ -45,38 +45,38 @@ const pemfDetails: TherapyInfoItem[] = [
 /* Best-for categories                                                        */
 /* -------------------------------------------------------------------------- */
 
-const pemfBestFor: string[] = [
-  "Chronic Pain",
-  "Osteoarthritis",
-  "Sports Recovery",
-  "Post-Surgical Healing",
-  "Nerve Pain",
-  "Muscle Fatigue",
+const sixHealingSoundsBestFor: string[] = [
+  "Stress Relief",
+  "Better Sleep",
+  "Emotional Balance",
+  "Mindfulness Practice",
+  "Fatigue Recovery",
+  "Inner Calm",
 ];
 
 /* -------------------------------------------------------------------------- */
 /* Page                                                                       */
 /* -------------------------------------------------------------------------- */
 
-export default function PemfPage() {
+export default function SixHealingSoundsPage() {
   return (
     <main className="w-full overflow-hidden pt-[70px]">
       <TherapyBanner
-        src="/images/pemf-banner.png"
-        alt="Patient receiving Pulsed Electromagnetic Field Therapy"
+        src="/images/six-healing-sounds-banner.png"
+        alt="Participant experiencing a guided Six Healing Sounds session"
         priority
       />
 
       <TherapyInfoCard
-        title="PEMF Therapy"
-        description="Heal Naturally. Recharge Your Body. Move Without Pain."
-        items={pemfDetails}
+        title="Six Healing Sounds"
+        description="Find Calm. Feel Balanced. Heal Naturally."
+        items={sixHealingSoundsDetails}
       />
 
       <TherapyAboutSection
-        currentTherapyId="pemf"
-        description="Experience advanced electromagnetic therapy designed to relieve pain, accelerate healing, and improve overall physical function. Our PEMF sessions are customized to support recovery, reduce inflammation, and enhance your body's natural regenerative abilities."
-        bestFor={pemfBestFor}
+        currentTherapyId="six-healing-sounds"
+        description="Experience the healing power of sound through carefully tuned vibrations that relax the mind and body. Our Sound Healing sessions help release tension, improve focus, enhance emotional balance, and create a deep sense of peace and relaxation."
+        bestFor={sixHealingSoundsBestFor}
       />
     </main>
   );
