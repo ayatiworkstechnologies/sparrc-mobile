@@ -280,6 +280,7 @@ const LABEL_CLASS = `
 `;
 
 const INPUT_CLASS = `
+  ios-no-zoom-field
   h-[40px]
   w-full
   rounded-[14px]
@@ -718,6 +719,16 @@ export default function BottomNav({
 
   return (
     <>
+      {/* iOS Safari: prevent automatic zoom when focusing form fields. */}
+      <style jsx global>{`
+        @supports (-webkit-touch-callout: none) {
+          input.ios-no-zoom-field,
+          textarea.ios-no-zoom-field {
+            font-size: 16px !important;
+          }
+        }
+      `}</style>
+
       {/* ============================================================ */}
       {/* Therapy inner page action menu                               */}
       {/* ============================================================ */}
@@ -1340,6 +1351,7 @@ export default function BottomNav({
                       rows={3}
                       disabled={status.type === "submitting"}
                       className="
+                        ios-no-zoom-field
                         min-h-[72px]
                         w-full
                         resize-none
@@ -1859,6 +1871,7 @@ export default function BottomNav({
                 }}
                 placeholder="Search therapies, pages, or keywords..."
                 className="
+                  ios-no-zoom-field
                   min-w-0
                   flex-1
                   bg-transparent
