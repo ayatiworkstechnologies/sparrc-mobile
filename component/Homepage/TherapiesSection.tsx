@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { AnimatePresence, motion, PanInfo } from "framer-motion";
+import { AnimatePresence, motion, type PanInfo } from "framer-motion";
 import { Search, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
@@ -10,6 +10,7 @@ import {
   useMemo,
   useRef,
   useState,
+  type KeyboardEvent,
 } from "react";
 
 type TherapySearchItem = {
@@ -115,7 +116,7 @@ const therapyPages: TherapySearchItem[] = [
     description: "Breathing and Sound Practice for Body Relaxation",
     keywords: ["Healing Sounds", "Breathing Therapy"],
     href: "/therapy/six-healing-sounds",
-  }, 
+  },
 ];
 
 const galleryImages: GalleryImage[] = [
@@ -175,8 +176,6 @@ export default function TherapiesSection() {
       return {
         ...image,
         stackPosition: offset,
-
-        // Prevents Framer Motion from reusing the old image card.
         uniqueKey: `${activeIndex}-${image.id}-${offset}`,
       };
     });
@@ -185,7 +184,7 @@ export default function TherapiesSection() {
   const goToNextSlide = useCallback(() => {
     setActiveIndex(
       (currentIndex) =>
-        (currentIndex + 1) % galleryImages.length
+        (currentIndex + 1) % galleryImages.length,
     );
   }, []);
 
@@ -193,7 +192,7 @@ export default function TherapiesSection() {
     setActiveIndex(
       (currentIndex) =>
         (currentIndex - 1 + galleryImages.length) %
-        galleryImages.length
+        galleryImages.length,
     );
   }, []);
 
@@ -212,7 +211,7 @@ export default function TherapiesSection() {
   };
 
   const handleSearchKeyDown = (
-    event: React.KeyboardEvent<HTMLInputElement>
+    event: KeyboardEvent<HTMLInputElement>,
   ) => {
     if (
       event.key === "Enter" &&
@@ -224,12 +223,13 @@ export default function TherapiesSection() {
 
     if (event.key === "Escape") {
       setIsSearchFocused(false);
+      event.currentTarget.blur();
     }
   };
 
   const handleDragEnd = (
     _event: MouseEvent | TouchEvent | PointerEvent,
-    info: PanInfo
+    info: PanInfo,
   ) => {
     if (info.offset.x <= -60) {
       goToNextSlide();
@@ -256,23 +256,26 @@ export default function TherapiesSection() {
   }, [goToNextSlide, isPaused]);
 
   useEffect(() => {
-    const handleOutsideClick = (event: MouseEvent) => {
+    const handleOutsidePointerDown = (event: PointerEvent) => {
       if (
         searchContainerRef.current &&
         !searchContainerRef.current.contains(
-          event.target as Node
+          event.target as Node,
         )
       ) {
         setIsSearchFocused(false);
       }
     };
 
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener(
+      "pointerdown",
+      handleOutsidePointerDown,
+    );
 
     return () => {
       document.removeEventListener(
-        "mousedown",
-        handleOutsideClick
+        "pointerdown",
+        handleOutsidePointerDown,
       );
     };
   }, []);
@@ -288,11 +291,25 @@ export default function TherapiesSection() {
               className="relative z-30"
             >
               <div
-                className={`flex min-h-[58px] items-center rounded-full border bg-white px-4 shadow-[0_5px_22px_rgba(19,34,68,0.06)] transition-colors duration-300 ${
-                  isSearchFocused
-                    ? "border-[#51479d]"
-                    : "border-[#e7e7e7]"
-                }`}
+                className={`
+                  flex
+                  min-h-[58px]
+                  w-full
+                  min-w-0
+                  items-center
+                  rounded-full
+                  border
+                  bg-white
+                  px-4
+                  shadow-[0_5px_22px_rgba(19,34,68,0.06)]
+                  transition-colors
+                  duration-300
+                  ${
+                    isSearchFocused
+                      ? "border-[#51479d]"
+                      : "border-[#e7e7e7]"
+                  }
+                `}
               >
                 <Search
                   size={25}
@@ -310,7 +327,9 @@ export default function TherapiesSection() {
 
                   <input
                     id="therapy-search"
-                    type="text"
+                    type="search"
+                    inputMode="search"
+                    enterKeyHint="search"
                     value={searchValue}
                     onChange={(event) => {
                       setSearchValue(event.target.value);
@@ -320,7 +339,28 @@ export default function TherapiesSection() {
                     onKeyDown={handleSearchKeyDown}
                     placeholder="Therapy"
                     autoComplete="off"
-                    className="mt-1 w-full bg-transparent text-[14px] font-normal text-[#182033] outline-none placeholder:text-[#9b9b9b]"
+                    autoCorrect="off"
+                    spellCheck={false}
+                    aria-label="Search therapies"
+                    className="
+                      mt-1
+                      block
+                      w-full
+                      min-w-0
+                      appearance-none
+                      border-0
+                      bg-transparent
+                      p-0
+                      text-[16px]
+                      font-normal
+                      leading-[1.25]
+                      text-[#182033]
+                      outline-none
+                      placeholder:text-[#9b9b9b]
+                      sm:text-[14px]
+                      [&::-webkit-search-cancel-button]:hidden
+                      [&::-webkit-search-decoration]:hidden
+                    "
                   />
                 </div>
 
@@ -332,7 +372,21 @@ export default function TherapiesSection() {
                       setIsSearchFocused(true);
                     }}
                     aria-label="Clear therapy search"
-                    className="ml-2 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#f5f6f8] text-[#182033] transition-colors hover:bg-[#ebedf2]"
+                    className="
+                      ml-2
+                      flex
+                      h-8
+                      w-8
+                      shrink-0
+                      touch-manipulation
+                      items-center
+                      justify-center
+                      rounded-full
+                      bg-[#f5f6f8]
+                      text-[#182033]
+                      transition-colors
+                      hover:bg-[#ebedf2]
+                    "
                   >
                     <X size={16} />
                   </button>
@@ -345,32 +399,63 @@ export default function TherapiesSection() {
                     initial={{
                       opacity: 0,
                       y: 8,
+                      scale: 0.985,
                     }}
                     animate={{
                       opacity: 1,
                       y: 0,
+                      scale: 1,
                     }}
                     exit={{
                       opacity: 0,
                       y: 8,
+                      scale: 0.985,
                     }}
                     transition={{
                       duration: 0.2,
+                      ease: [0.22, 1, 0.36, 1],
                     }}
-                    className="absolute left-0 right-0 top-[66px] max-h-[250px] overflow-y-auto rounded-[20px] border border-[#eceef2] bg-white p-2 shadow-[0_16px_40px_rgba(20,30,55,0.12)]"
+                    className="
+                      absolute
+                      left-0
+                      right-0
+                      top-[66px]
+                      max-h-[250px]
+                      overscroll-contain
+                      overflow-y-auto
+                      rounded-[20px]
+                      border
+                      border-[#eceef2]
+                      bg-white
+                      p-2
+                      shadow-[0_16px_40px_rgba(20,30,55,0.12)]
+                      [-webkit-overflow-scrolling:touch]
+                    "
                   >
                     {filteredTherapies.length > 0 ? (
                       filteredTherapies.map((therapy) => (
                         <button
                           key={therapy.id}
                           type="button"
-                          onMouseDown={(event) => {
+                          onPointerDown={(event) => {
                             event.preventDefault();
                           }}
                           onClick={() => {
                             selectTherapy(therapy);
                           }}
-                          className="flex w-full items-center gap-3 rounded-[14px] px-3 py-3 text-left transition-colors hover:bg-[#f5f7fa]"
+                          className="
+                            flex
+                            w-full
+                            touch-manipulation
+                            items-center
+                            gap-3
+                            rounded-[14px]
+                            px-3
+                            py-3
+                            text-left
+                            transition-colors
+                            hover:bg-[#f5f7fa]
+                          "
                         >
                           <Search
                             size={17}
@@ -401,7 +486,14 @@ export default function TherapiesSection() {
 
             {/* Gallery */}
             <div
-              className="relative mt-5 h-[340px] w-full touch-pan-y"
+              className="
+                relative
+                mt-5
+                h-[340px]
+                w-full
+                touch-pan-y
+                [webkit-user-select:none]
+              "
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
               onTouchStart={() => setIsPaused(true)}
@@ -467,11 +559,23 @@ export default function TherapiesSection() {
                             ease: [0.22, 1, 0.36, 1],
                           },
                         }}
-                        className={`absolute left-0 top-0 h-[320px] w-[calc(100%-28px)] overflow-hidden rounded-[20px] bg-[#e9e9e9] shadow-[0_15px_38px_rgba(16,29,50,0.12)] will-change-transform ${
-                          position === 0
-                            ? "cursor-grab active:cursor-grabbing"
-                            : "pointer-events-none"
-                        }`}
+                        className={`
+                          absolute
+                          left-0
+                          top-0
+                          h-[320px]
+                          w-[calc(100%_-_28px)]
+                          overflow-hidden
+                          rounded-[20px]
+                          bg-[#e9e9e9]
+                          shadow-[0_15px_38px_rgba(16,29,50,0.12)]
+                          will-change-transform
+                          ${
+                            position === 0
+                              ? "cursor-grab active:cursor-grabbing"
+                              : "pointer-events-none"
+                          }
+                        `}
                       >
                         <Image
                           key={galleryImage.image}
@@ -498,13 +602,22 @@ export default function TherapiesSection() {
                   onClick={() => goToSlide(index)}
                   aria-label={`View gallery image ${index + 1}`}
                   aria-current={
-                    activeIndex === index ? "true" : undefined
-                  }
-                  className={`h-[6px] rounded-full transition-all duration-300 ${
                     activeIndex === index
-                      ? "w-6 bg-[#51479d]"
-                      : "w-[6px] bg-[#d8dae0] hover:bg-[#aeb2bd]"
-                  }`}
+                      ? "true"
+                      : undefined
+                  }
+                  className={`
+                    h-[6px]
+                    touch-manipulation
+                    rounded-full
+                    transition-all
+                    duration-300
+                    ${
+                      activeIndex === index
+                        ? "w-6 bg-[#51479d]"
+                        : "w-[6px] bg-[#d8dae0] hover:bg-[#aeb2bd]"
+                    }
+                  `}
                 />
               ))}
             </div>
