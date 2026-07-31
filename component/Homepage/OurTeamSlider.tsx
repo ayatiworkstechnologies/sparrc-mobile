@@ -148,7 +148,7 @@ export default function OurTeamSlider() {
           onTouchEnd={() => setIsPaused(false)}
           onTouchCancel={() => setIsPaused(false)}
         >
-          <div className="relative h-[190px] overflow-hidden rounded-[19px] sm:h-[200px]">
+          <div className="relative h-[160px] overflow-hidden rounded-[19px] sm:h-[200px]">
             <AnimatePresence initial={false} custom={direction} mode="wait">
               <motion.article
                 key={activeMember.id}
@@ -186,29 +186,81 @@ export default function OurTeamSlider() {
 
                 <div className="pointer-events-none absolute -bottom-20 -left-10 h-[200px] w-[200px] rounded-full bg-[#210393]/45 blur-3xl" />
 
-                <div className="relative z-10 flex w-full items-center gap-6 sm:gap-9">
-                  <div className="relative h-[91px] w-[82px] shrink-0 overflow-hidden rounded-[8px] bg-white shadow-[0_8px_18px_rgba(0,0,0,0.18)] sm:h-[125px] sm:w-[112px]">
+                <div className="relative z-10 flex w-full items-center gap-5 sm:gap-9">
+                  {/* Team member image */}
+                  <div
+                    className="
+      relative
+      h-[108px]
+      w-[96px]
+      shrink-0
+      overflow-hidden
+      rounded-[10px]
+      bg-white
+      shadow-[0_8px_20px_rgba(0,0,0,0.2)]
+      sm:h-[144px]
+      sm:w-[128px]
+    "
+                  >
                     <Image
                       src={activeMember.image}
                       alt={activeMember.name}
                       fill
                       priority
                       draggable={false}
-                      sizes="(max-width: 640px) 82px, 112px"
-                      className="pointer-events-none select-none object-cover object-top"
+                      sizes="(max-width: 640px) 96px, 128px"
+                      className="
+        pointer-events-none
+        select-none
+        object-cover
+        object-top
+      "
                     />
                   </div>
 
+                  {/* Team member information */}
                   <div className="min-w-0 flex-1 text-white">
-                    <h3 className="text-[18px] font-semibold leading-[1.2] tracking-[-0.2px] sm:text-[24px]">
+                    <h3
+                      className="
+        text-[18px]
+        font-semibold
+        leading-[1.2]
+        tracking-[-0.2px]
+        sm:text-[24px]
+      "
+                    >
                       {activeMember.name}
                     </h3>
 
-                    <p className="mt-1.5 text-[15px] font-medium leading-[1.3] text-white/95 sm:mt-2 sm:text-[19px]">
+                    <p
+                      className="
+        mt-1.5
+        text-[15px]
+        font-medium
+        leading-[1.3]
+        text-white/95
+        sm:mt-2
+        sm:text-[19px]
+      "
+                    >
                       {activeMember.designation}
                     </p>
 
-                    <p className="mt-3 max-w-[720px] whitespace-normal break-words text-[14px] font-normal leading-[1.45] text-white/90 sm:mt-4 sm:text-[17px] sm:leading-[1.5]">
+                    <p
+                      className="
+        mt-3
+        max-w-[720px]
+        whitespace-normal
+        break-words
+        text-[14px]
+        font-normal
+        leading-[1.45]
+        text-white/90
+        sm:mt-4
+        sm:text-[17px]
+        sm:leading-[1.5]
+      "
+                    >
                       {activeMember.description}
                     </p>
                   </div>
@@ -225,11 +277,10 @@ export default function OurTeamSlider() {
                 onClick={() => goToSlide(index)}
                 aria-label={`View ${member.name}`}
                 aria-current={activeIndex === index ? "true" : undefined}
-                className={`h-[7px] rounded-full transition-all duration-300 ${
-                  activeIndex === index
+                className={`h-[7px] rounded-full transition-all duration-300 ${activeIndex === index
                     ? "w-7 bg-[#210393]"
                     : "w-[7px] bg-[#d8dae3] hover:bg-[#9da1b1]"
-                }`}
+                  }`}
               />
             ))}
           </div>

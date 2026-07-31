@@ -248,7 +248,7 @@ export default function TherapiesSection() {
 
     const interval = window.setInterval(() => {
       goToNextSlide();
-    }, 5500);
+    }, 4000);
 
     return () => {
       window.clearInterval(interval);

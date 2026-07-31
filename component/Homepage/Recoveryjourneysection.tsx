@@ -25,7 +25,6 @@ export interface TherapyItem {
 export interface FilterOption {
   id: string;
   label: string;
-  icon: string;
 }
 
 /* ------------------------------------------------------------------ */
@@ -36,7 +35,7 @@ export const THERAPIES: TherapyItem[] = [
   {
     id: "physiotherapy",
     title: "Physiotherapy",
-    tag: "Theraphy",
+    tag: "Therapy",
     image: "/images/physiotherapy.png",
     icon: "/icons/theraphy.svg",
     href: "/therapy/physiotherapy",
@@ -44,7 +43,7 @@ export const THERAPIES: TherapyItem[] = [
   {
     id: "mtpt",
     title: "MTPT",
-    tag: "Theraphy",
+    tag: "Therapy",
     image: "/images/mtpt-1.png",
     icon: "/icons/theraphy.svg",
     href: "/therapy/mtpt",
@@ -52,7 +51,7 @@ export const THERAPIES: TherapyItem[] = [
   {
     id: "pemf",
     title: "PEMF",
-    tag: "Theraphy",
+    tag: "Therapy",
     image: "/images/pemf.png",
     icon: "/icons/theraphy.svg",
     href: "/therapy/pemf",
@@ -60,7 +59,7 @@ export const THERAPIES: TherapyItem[] = [
   {
     id: "group-therapy",
     title: "Group Therapy",
-    tag: "Theraphy",
+    tag: "Therapy",
     image: "/images/group-therapy.png",
     icon: "/icons/theraphy.svg",
     href: "/therapy/group-therapy",
@@ -68,7 +67,7 @@ export const THERAPIES: TherapyItem[] = [
   {
     id: "yoga-therapy",
     title: "Yoga Therapy",
-    tag: "Theraphy",
+    tag: "Therapy",
     image: "/images/yoga-therapy.png",
     icon: "/icons/theraphy.svg",
     href: "/therapy/yoga-therapy",
@@ -76,7 +75,7 @@ export const THERAPIES: TherapyItem[] = [
   {
     id: "functional-training",
     title: "Functional Training",
-    tag: "Theraphy",
+    tag: "Therapy",
     image: "/images/functional-training.png",
     icon: "/icons/theraphy.svg",
     href: "/therapy/functional-training",
@@ -84,7 +83,7 @@ export const THERAPIES: TherapyItem[] = [
   {
     id: "prescription-exercise",
     title: "Prescription Exercise",
-    tag: "Theraphy",
+    tag: "Therapy",
     image: "/images/prescription-exercise.png",
     icon: "/icons/theraphy.svg",
     href: "/therapy/prescription-exercise",
@@ -92,7 +91,7 @@ export const THERAPIES: TherapyItem[] = [
   {
     id: "sports-massage",
     title: "Sports Massage",
-    tag: "Theraphy",
+    tag: "Therapy",
     image: "/images/sports-massage.png",
     icon: "/icons/theraphy.svg",
     href: "/therapy/sports-massage",
@@ -100,7 +99,7 @@ export const THERAPIES: TherapyItem[] = [
   {
     id: "aquatherapy",
     title: "Aquatherapy",
-    tag: "Theraphy",
+    tag: "Therapy",
     image: "/images/aquatherapy.png",
     icon: "/icons/theraphy.svg",
     href: "/therapy/aquatherapy",
@@ -108,7 +107,7 @@ export const THERAPIES: TherapyItem[] = [
   {
     id: "kalaripayattu",
     title: "Kalaripayattu",
-    tag: "Theraphy",
+    tag: "Therapy",
     image: "/images/kalaripayattu.png",
     icon: "/icons/theraphy.svg",
     href: "/therapy/kalaripayattu",
@@ -116,7 +115,7 @@ export const THERAPIES: TherapyItem[] = [
   {
     id: "cranio-sacral",
     title: "Cranio Sacral Therapy",
-    tag: "Theraphy",
+    tag: "Therapy",
     image: "/images/cranio-sacral.png",
     icon: "/icons/theraphy.svg",
     href: "/therapy/cranio-sacral",
@@ -124,7 +123,7 @@ export const THERAPIES: TherapyItem[] = [
   {
     id: "six-healing-sounds",
     title: "Six Healing Sounds",
-    tag: "Theraphy",
+    tag: "Therapy",
     image: "/images/six-healing-sounds.png",
     icon: "/icons/theraphy.svg",
     href: "/therapy/six-healing-sounds",
@@ -132,29 +131,26 @@ export const THERAPIES: TherapyItem[] = [
 ];
 
 /* ------------------------------------------------------------------ */
-/* Filters                                                             */
+/* Filters — no icons                                                  */
 /* ------------------------------------------------------------------ */
 
 export const FILTERS: FilterOption[] = [
   {
-    id: "theraphy",
-    label: "Theraphy",
-    icon: "/icons/theraphy.svg",
+    id: "pain-relief",
+    label: "Pain Relief",
   },
   {
-    id: "department",
-    label: "Department",
-    icon: "/icons/theraphy.svg",
+    id: "sports-injury",
+    label: "Sports Injury",
   },
   {
-    id: "special",
-    label: "Special Theraphy",
-    icon: "/icons/theraphy.svg",
+    id: "rehabilitation",
+    label: "Rehabilitation",
   },
 ];
 
 /* ------------------------------------------------------------------ */
-/* Motion variants                                                    */
+/* Motion variants                                                     */
 /* ------------------------------------------------------------------ */
 
 const cardVariants: Variants = {
@@ -176,7 +172,7 @@ const cardVariants: Variants = {
 };
 
 /* ------------------------------------------------------------------ */
-/* Carousel configuration                                             */
+/* Carousel configuration                                              */
 /* ------------------------------------------------------------------ */
 
 const CARD_WIDTH = 130;
@@ -185,24 +181,18 @@ const AUTOPLAY_INTERVAL = 2800;
 const RESUME_DELAY = 2000;
 
 /* ------------------------------------------------------------------ */
-/* Component                                                          */
+/* Component                                                           */
 /* ------------------------------------------------------------------ */
 
 export default function RecoveryJourneySection() {
   const trackRef = useRef<HTMLDivElement | null>(null);
-
-  const isPausedRef = useRef<boolean>(false);
-
-  /*
-   * Correct browser timeout type.
-   * window.setTimeout returns a number.
-   */
+  const isPausedRef = useRef(false);
   const resumeTimeoutRef = useRef<number | null>(null);
 
   const prefersReducedMotion = useReducedMotion();
 
   /* ---------------------------------------------------------------- */
-  /* Autoplay                                                         */
+  /* Autoplay                                                          */
   /* ---------------------------------------------------------------- */
 
   useEffect(() => {
@@ -243,7 +233,7 @@ export default function RecoveryJourneySection() {
   }, [prefersReducedMotion]);
 
   /* ---------------------------------------------------------------- */
-  /* Pause autoplay                                                   */
+  /* Pause autoplay                                                    */
   /* ---------------------------------------------------------------- */
 
   const pauseAutoplay = () => {
@@ -256,11 +246,11 @@ export default function RecoveryJourneySection() {
   };
 
   /* ---------------------------------------------------------------- */
-  /* Resume autoplay                                                  */
+  /* Resume autoplay                                                   */
   /* ---------------------------------------------------------------- */
 
   const scheduleResume = (
-    delay: number = RESUME_DELAY
+    delay: number = RESUME_DELAY,
   ) => {
     if (resumeTimeoutRef.current !== null) {
       window.clearTimeout(resumeTimeoutRef.current);
@@ -273,7 +263,7 @@ export default function RecoveryJourneySection() {
   };
 
   /* ---------------------------------------------------------------- */
-  /* Cleanup timeout                                                  */
+  /* Cleanup timeout                                                   */
   /* ---------------------------------------------------------------- */
 
   useEffect(() => {
@@ -288,29 +278,37 @@ export default function RecoveryJourneySection() {
   return (
     <section className="w-full bg-white px-4 py-6">
       {/* Heading, filters and subtitle */}
+
       <div>
         <h2 className="text-[26px] font-extrabold leading-tight tracking-tight text-neutral-900">
           What are you recovering from?
         </h2>
 
-        {/* Filter pills */}
-        <div className="mt-3 flex flex-wrap gap-2">
+        {/* Filter pills — no icons */}
+
+        <div className="mt-3 flex flex-wrap gap-4">
           {FILTERS.map((filter) => (
             <button
               key={filter.id}
               type="button"
-              className="flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-3.5 py-2 text-[13px] font-medium text-neutral-900 shadow-sm transition-transform duration-150 active:scale-[0.97]"
+              className="
+                rounded-full
+                border
+                border-neutral-300
+                bg-white
+                px-3.5
+                py-2
+                text-[13px]
+                font-medium
+                text-neutral-900
+                transition-all
+                duration-200
+                hover:border-[#1464d2]
+                hover:text-[#1464d2]
+                active:scale-[0.97]
+              "
             >
-              <Image
-                src={filter.icon}
-                alt=""
-                width={16}
-                height={16}
-                draggable={false}
-                className="shrink-0"
-              />
-
-              <span>{filter.label}</span>
+              {filter.label}
             </button>
           ))}
         </div>
@@ -320,7 +318,8 @@ export default function RecoveryJourneySection() {
         </p>
       </div>
 
-      {/* Fixed horizontal carousel */}
+      {/* Horizontal carousel */}
+
       <div className="relative mt-3 h-[148px] w-full overflow-hidden">
         <div
           ref={trackRef}
@@ -333,11 +332,17 @@ export default function RecoveryJourneySection() {
           onPointerUp={() => scheduleResume()}
           onPointerCancel={() => scheduleResume()}
           className="
-            flex h-full items-start gap-3
-            overflow-x-auto overflow-y-hidden
+            flex
+            h-full
+            items-start
+            gap-3
+            overflow-x-auto
+            overflow-y-hidden
             overscroll-x-contain
-            snap-x snap-mandatory
-            scroll-smooth pb-1
+            scroll-smooth
+            snap-x
+            snap-mandatory
+            pb-1
             [touch-action:pan-x]
             [-ms-overflow-style:none]
             [scrollbar-width:none]
@@ -366,7 +371,12 @@ export default function RecoveryJourneySection() {
               whileTap={{
                 scale: 0.96,
               }}
-              className="h-[146px] w-[130px] shrink-0 snap-start"
+              className="
+                h-[146px]
+                w-[130px]
+                shrink-0
+                snap-start
+              "
             >
               <Link
                 href={item.href}
@@ -374,6 +384,7 @@ export default function RecoveryJourneySection() {
                 className="group block h-full w-full"
               >
                 {/* Therapy image */}
+
                 <div className="relative h-[100px] w-[130px] overflow-hidden rounded-2xl bg-neutral-100">
                   <Image
                     src={item.image}
@@ -381,16 +392,28 @@ export default function RecoveryJourneySection() {
                     width={130}
                     height={100}
                     draggable={false}
-                    className="pointer-events-none h-[100px] w-[130px] select-none object-cover transition-transform duration-300 ease-out group-hover:scale-105"
+                    className="
+                      pointer-events-none
+                      h-[100px]
+                      w-[130px]
+                      select-none
+                      object-cover
+                      transition-transform
+                      duration-300
+                      ease-out
+                      group-hover:scale-105
+                    "
                   />
                 </div>
 
                 {/* Therapy title */}
+
                 <p className="mt-2 truncate text-[15px] font-bold text-neutral-900">
                   {item.title}
                 </p>
 
                 {/* Therapy tag */}
+
                 <div className="mt-0.5 flex items-center gap-1 text-[12px] text-neutral-400">
                   <Image
                     src={item.icon}
@@ -398,6 +421,7 @@ export default function RecoveryJourneySection() {
                     width={12}
                     height={12}
                     draggable={false}
+                    aria-hidden="true"
                     className="pointer-events-none select-none"
                   />
 
