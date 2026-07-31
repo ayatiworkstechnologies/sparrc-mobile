@@ -406,19 +406,19 @@ export default function AllTherapiesSection() {
     if (sortOption === "Highest Rated") {
       return [...filtered].sort(
         (first, second) =>
-          second.rating - first.rating
+          second.rating - first.rating,
       );
     }
 
     if (sortOption === "Name A-Z") {
       return [...filtered].sort((first, second) =>
-        first.title.localeCompare(second.title)
+        first.title.localeCompare(second.title),
       );
     }
 
     if (sortOption === "Name Z-A") {
       return [...filtered].sort((first, second) =>
-        second.title.localeCompare(first.title)
+        second.title.localeCompare(first.title),
       );
     }
 
@@ -457,6 +457,7 @@ export default function AllTherapiesSection() {
       >
         <div className="mx-auto w-full max-w-[1180px]">
           {/* Search */}
+
           <motion.div
             initial={
               prefersReducedMotion
@@ -483,7 +484,9 @@ export default function AllTherapiesSection() {
             />
 
             <input
-              type="text"
+              type="search"
+              inputMode="search"
+              enterKeyHint="search"
               value={searchValue}
               onChange={(event) =>
                 setSearchValue(event.target.value)
@@ -491,19 +494,35 @@ export default function AllTherapiesSection() {
               placeholder="Search therapies..."
               aria-label="Search therapies"
               autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="none"
+              spellCheck={false}
               className="
-                h-[54px] w-full rounded-full
-                border border-[#5269ed]
+                block
+                h-[54px]
+                w-full
+                min-w-0
+                appearance-none
+                rounded-full
+                border
+                border-[#5269ed]
                 bg-white
-                pl-[43px] pr-[92px]
-                text-[14px] font-medium
+                pl-[43px]
+                pr-[92px]
+                text-[16px]
+                font-medium
+                leading-normal
                 text-[#182033]
                 outline-none
-                transition-all duration-300
+                transition-all
+                duration-300
                 placeholder:text-[#77879c]
                 focus:border-[#3148d7]
                 focus:shadow-[0_7px_22px_rgba(35,67,165,0.11)]
-                sm:h-[58px] sm:text-[15px]
+                md:text-[15px]
+                sm:h-[58px]
+                [&::-webkit-search-cancel-button]:hidden
+                [&::-webkit-search-decoration]:hidden
               "
             />
 
@@ -529,7 +548,19 @@ export default function AllTherapiesSection() {
                     }}
                     onClick={() => setSearchValue("")}
                     aria-label="Clear search"
-                    className="flex h-9 w-9 items-center justify-center rounded-full text-[#3151a6] transition-colors active:bg-black/5"
+                    className="
+                      flex
+                      h-9
+                      w-9
+                      touch-manipulation
+                      items-center
+                      justify-center
+                      rounded-full
+                      text-[#3151a6]
+                      transition-colors
+                      active:bg-black/5
+                      [-webkit-tap-highlight-color:transparent]
+                    "
                   >
                     <X size={17} strokeWidth={2.4} />
                   </motion.button>
@@ -540,7 +571,20 @@ export default function AllTherapiesSection() {
                 type="button"
                 onClick={openFilters}
                 aria-label="Open filters"
-                className="relative flex h-9 w-9 items-center justify-center rounded-full text-[#243047] transition-colors active:bg-black/5"
+                className="
+                  relative
+                  flex
+                  h-9
+                  w-9
+                  touch-manipulation
+                  items-center
+                  justify-center
+                  rounded-full
+                  text-[#243047]
+                  transition-colors
+                  active:bg-black/5
+                  [-webkit-tap-highlight-color:transparent]
+                "
               >
                 <SlidersHorizontal
                   size={20}
@@ -557,6 +601,7 @@ export default function AllTherapiesSection() {
           </motion.div>
 
           {/* Categories */}
+
           <motion.div
             initial={
               prefersReducedMotion
@@ -576,12 +621,18 @@ export default function AllTherapiesSection() {
               ease: [0.22, 1, 0.36, 1],
             }}
             className="
-              -mx-3 mt-5 flex gap-2.5
-              overflow-x-auto px-3 pb-2
+              -mx-3
+              mt-5
+              flex
+              gap-2.5
+              overflow-x-auto
+              px-3
+              pb-2
               [-ms-overflow-style:none]
               [scrollbar-width:none]
               [&::-webkit-scrollbar]:hidden
-              sm:mx-0 sm:px-0
+              sm:mx-0
+              sm:px-0
             "
           >
             {CATEGORIES.map((category) => {
@@ -599,12 +650,21 @@ export default function AllTherapiesSection() {
                     setActiveCategory(category)
                   }
                   className={`
-                    relative shrink-0 overflow-hidden
-                    rounded-full border
-                    px-4 py-[8px]
-                    text-[12px] font-semibold
-                    transition-colors duration-300
-                    sm:px-5 sm:py-2.5 sm:text-[14px]
+                    relative
+                    shrink-0
+                    touch-manipulation
+                    overflow-hidden
+                    rounded-full
+                    border
+                    px-4
+                    py-[8px]
+                    text-[12px]
+                    font-semibold
+                    transition-colors
+                    duration-300
+                    sm:px-5
+                    sm:py-2.5
+                    sm:text-[14px]
                     ${
                       isActive
                         ? "border-transparent text-white shadow-[0_7px_18px_rgba(24,83,210,0.24)]"
@@ -633,6 +693,7 @@ export default function AllTherapiesSection() {
           </motion.div>
 
           {/* Heading */}
+
           <motion.div
             initial={
               prefersReducedMotion
@@ -674,6 +735,7 @@ export default function AllTherapiesSection() {
           </motion.div>
 
           {/* Active filters */}
+
           <AnimatePresence>
             {(minimumRating > 0 ||
               sortOption !== "Recommended") && (
@@ -728,7 +790,8 @@ export default function AllTherapiesSection() {
             )}
           </AnimatePresence>
 
-          {/* Cards */}
+          {/* Therapy cards */}
+
           <AnimatePresence mode="wait">
             {filteredTherapies.length > 0 ? (
               <motion.div
@@ -747,9 +810,13 @@ export default function AllTherapiesSection() {
                   },
                 }}
                 className="
-                  mt-5 grid grid-cols-2
-                  gap-x-3 gap-y-4
-                  sm:grid-cols-3 sm:gap-5
+                  mt-5
+                  grid
+                  grid-cols-2
+                  gap-x-3
+                  gap-y-4
+                  sm:grid-cols-3
+                  sm:gap-5
                   lg:grid-cols-4
                   xl:grid-cols-5
                 "
@@ -777,18 +844,20 @@ export default function AllTherapiesSection() {
                       },
                     }}
                     className="
-                      min-w-0 overflow-hidden
+                      min-w-0
+                      overflow-hidden
                       rounded-[18px]
-                      bg-white p-2 
+                      bg-white
+                      p-2
                       shadow-[0_7px_22px_rgba(29,45,72,0.08)]
-                      sm:rounded-[22px] sm:p-3
+                      sm:rounded-[22px]
+                      sm:p-3
                     "
                   >
                     <Link
                       href={therapy.href}
                       className="group block"
                     >
-                      {/* Image */}
                       <div className="relative mx-auto h-[159px] w-[172px] max-w-full overflow-hidden rounded-[14px] bg-[#edf1f5] sm:rounded-[17px]">
                         <Image
                           src={therapy.image}
@@ -798,7 +867,8 @@ export default function AllTherapiesSection() {
                           sizes="159px"
                           className="
                             pointer-events-none
-                            select-none object-cover
+                            select-none
+                            object-cover
                             object-center
                             transition-transform
                             duration-700
@@ -810,7 +880,6 @@ export default function AllTherapiesSection() {
                         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/[0.04] to-transparent" />
                       </div>
 
-                      {/* Category and rating */}
                       <div className="mt-2.5 flex items-center justify-between gap-1.5">
                         <span className="min-w-0 truncate rounded-[7px] bg-[#edf4ff] px-2 py-1 text-[10px] font-bold text-[#2250ce] sm:text-[12px]">
                           {therapy.category}
@@ -829,12 +898,10 @@ export default function AllTherapiesSection() {
                         </div>
                       </div>
 
-                      {/* Title */}
                       <h3 className="mt-2 line-clamp-2 min-h-[34px] text-[14px] font-extrabold leading-[1.2] tracking-[-0.2px] text-black sm:min-h-[40px] sm:text-[17px]">
                         {therapy.title}
                       </h3>
 
-                      {/* Description */}
                       <p className="mt-1.5 line-clamp-2 min-h-[34px] text-[11px] font-medium leading-[1.35] text-[#929292] sm:min-h-[38px] sm:text-[13px]">
                         {therapy.description}
                       </p>
@@ -894,6 +961,7 @@ export default function AllTherapiesSection() {
       </motion.section>
 
       {/* Filter bottom sheet */}
+
       <AnimatePresence>
         {filterOpen && (
           <>
@@ -933,12 +1001,20 @@ export default function AllTherapiesSection() {
                 mass: 0.9,
               }}
               className="
-                fixed inset-x-0 bottom-0 z-[1001]
-                max-h-[88vh] overflow-y-auto
-                rounded-t-[28px] bg-white
-                px-5 pb-[calc(22px+env(safe-area-inset-bottom))]
-                pt-3 shadow-[0_-20px_50px_rgba(0,0,0,0.16)]
-                sm:left-1/2 sm:max-w-[520px]
+                fixed
+                inset-x-0
+                bottom-0
+                z-[1001]
+                max-h-[88vh]
+                overflow-y-auto
+                rounded-t-[28px]
+                bg-white
+                px-5
+                pb-[calc(22px+env(safe-area-inset-bottom))]
+                pt-3
+                shadow-[0_-20px_50px_rgba(0,0,0,0.16)]
+                sm:left-1/2
+                sm:max-w-[520px]
                 sm:-translate-x-1/2
               "
             >
@@ -966,6 +1042,7 @@ export default function AllTherapiesSection() {
               </div>
 
               {/* Category */}
+
               <div className="mt-6">
                 <h4 className="text-[15px] font-bold text-[#202839]">
                   Category
@@ -983,11 +1060,23 @@ export default function AllTherapiesSection() {
                         onClick={() =>
                           setDraftCategory(category)
                         }
-                        className={`flex items-center gap-1.5 rounded-full border px-4 py-2.5 text-[13px] font-semibold transition-all ${
-                          isSelected
-                            ? "border-[#274ad4] bg-[#edf3ff] text-[#274ad4]"
-                            : "border-[#dfe5ed] bg-white text-[#6f7d91]"
-                        }`}
+                        className={`
+                          flex
+                          items-center
+                          gap-1.5
+                          rounded-full
+                          border
+                          px-4
+                          py-2.5
+                          text-[13px]
+                          font-semibold
+                          transition-all
+                          ${
+                            isSelected
+                              ? "border-[#274ad4] bg-[#edf3ff] text-[#274ad4]"
+                              : "border-[#dfe5ed] bg-white text-[#6f7d91]"
+                          }
+                        `}
                       >
                         {isSelected && (
                           <Check size={14} />
@@ -1001,6 +1090,7 @@ export default function AllTherapiesSection() {
               </div>
 
               {/* Rating */}
+
               <div className="mt-6">
                 <h4 className="text-[15px] font-bold text-[#202839]">
                   Minimum Rating
@@ -1018,11 +1108,23 @@ export default function AllTherapiesSection() {
                         onClick={() =>
                           setDraftRating(rating)
                         }
-                        className={`flex h-[46px] items-center justify-center gap-1.5 rounded-[13px] border text-[13px] font-semibold transition-all ${
-                          isSelected
-                            ? "border-[#274ad4] bg-[#edf3ff] text-[#274ad4]"
-                            : "border-[#dfe5ed] bg-white text-[#657287]"
-                        }`}
+                        className={`
+                          flex
+                          h-[46px]
+                          items-center
+                          justify-center
+                          gap-1.5
+                          rounded-[13px]
+                          border
+                          text-[13px]
+                          font-semibold
+                          transition-all
+                          ${
+                            isSelected
+                              ? "border-[#274ad4] bg-[#edf3ff] text-[#274ad4]"
+                              : "border-[#dfe5ed] bg-white text-[#657287]"
+                          }
+                        `}
                       >
                         {rating === 0 ? (
                           "Any rating"
@@ -1032,6 +1134,7 @@ export default function AllTherapiesSection() {
                               size={16}
                               className="text-[#f5a000]"
                             />
+
                             {rating}+ ratings
                           </>
                         )}
@@ -1042,6 +1145,7 @@ export default function AllTherapiesSection() {
               </div>
 
               {/* Sort */}
+
               <div className="mt-6">
                 <h4 className="text-[15px] font-bold text-[#202839]">
                   Sort By
@@ -1059,20 +1163,43 @@ export default function AllTherapiesSection() {
                         onClick={() =>
                           setDraftSort(option)
                         }
-                        className={`flex h-[48px] w-full items-center justify-between rounded-[13px] border px-4 text-left text-[13px] font-semibold transition-all ${
-                          isSelected
-                            ? "border-[#274ad4] bg-[#edf3ff] text-[#274ad4]"
-                            : "border-[#e1e6ed] bg-white text-[#566276]"
-                        }`}
+                        className={`
+                          flex
+                          h-[48px]
+                          w-full
+                          items-center
+                          justify-between
+                          rounded-[13px]
+                          border
+                          px-4
+                          text-left
+                          text-[13px]
+                          font-semibold
+                          transition-all
+                          ${
+                            isSelected
+                              ? "border-[#274ad4] bg-[#edf3ff] text-[#274ad4]"
+                              : "border-[#e1e6ed] bg-white text-[#566276]"
+                          }
+                        `}
                       >
                         {option}
 
                         <span
-                          className={`flex h-5 w-5 items-center justify-center rounded-full border ${
-                            isSelected
-                              ? "border-[#274ad4] bg-[#274ad4]"
-                              : "border-[#cbd2dc]"
-                          }`}
+                          className={`
+                            flex
+                            h-5
+                            w-5
+                            items-center
+                            justify-center
+                            rounded-full
+                            border
+                            ${
+                              isSelected
+                                ? "border-[#274ad4] bg-[#274ad4]"
+                                : "border-[#cbd2dc]"
+                            }
+                          `}
                         >
                           {isSelected && (
                             <Check
@@ -1088,6 +1215,7 @@ export default function AllTherapiesSection() {
               </div>
 
               {/* Buttons */}
+
               <div className="sticky bottom-0 mt-7 grid grid-cols-[0.8fr_1.2fr] gap-3 bg-white pb-1 pt-3">
                 <button
                   type="button"
