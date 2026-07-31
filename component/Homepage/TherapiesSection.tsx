@@ -122,17 +122,17 @@ const therapyPages: TherapySearchItem[] = [
 const galleryImages: GalleryImage[] = [
   {
     id: 1,
-    image: "/images/therapy-1.png",
+    image: "/images/therapy-01.png",
     alt: "SPARRC physiotherapy treatment",
   },
   {
     id: 2,
-    image: "/images/therapy-2.png",
+    image: "/images/therapy-02.png",
     alt: "SPARRC rehabilitation treatment",
   },
   {
     id: 3,
-    image: "/images/therapy-3.png",
+    image: "/images/therapy-03.png",
     alt: "SPARRC mobility treatment",
   },
 ];
